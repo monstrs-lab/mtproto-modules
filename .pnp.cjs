@@ -12,11 +12,46 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "mtproto-modules",\
       "reference": "workspace:."\
+    },\
+    {\
+      "name": "@monstrs/mtproto-codecs",\
+      "reference": "workspace:packages/mtproto-codecs"\
+    },\
+    {\
+      "name": "@monstrs/mtproto-core",\
+      "reference": "workspace:packages/mtproto-core"\
+    },\
+    {\
+      "name": "@monstrs/mtproto-crypto",\
+      "reference": "workspace:packages/mtproto-crypto"\
+    },\
+    {\
+      "name": "@monstrs/mtproto-extensions",\
+      "reference": "workspace:packages/mtproto-extensions"\
+    },\
+    {\
+      "name": "@monstrs/mtproto-tl-core",\
+      "reference": "workspace:packages/mtproto-tl-core"\
+    },\
+    {\
+      "name": "@monstrs/mtproto-tl-json-parser",\
+      "reference": "workspace:packages/mtproto-tl-json-parser"\
+    },\
+    {\
+      "name": "@monstrs/mtproto-tl-types",\
+      "reference": "workspace:packages/mtproto-tl-types"\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
+    ["@monstrs/mtproto-codecs", ["workspace:packages/mtproto-codecs"]],\
+    ["@monstrs/mtproto-core", ["workspace:packages/mtproto-core"]],\
+    ["@monstrs/mtproto-crypto", ["workspace:packages/mtproto-crypto"]],\
+    ["@monstrs/mtproto-extensions", ["workspace:packages/mtproto-extensions"]],\
+    ["@monstrs/mtproto-tl-core", ["workspace:packages/mtproto-tl-core"]],\
+    ["@monstrs/mtproto-tl-json-parser", ["workspace:packages/mtproto-tl-json-parser"]],\
+    ["@monstrs/mtproto-tl-types", ["workspace:packages/mtproto-tl-types"]],\
     ["mtproto-modules", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -1057,6 +1092,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@cryptography/aes", [\
+      ["npm:0.1.1", {\
+        "packageLocation": "./.yarn/cache/@cryptography-aes-npm-0.1.1-0bf958ef1c-cc736d1410.zip/node_modules/@cryptography/aes/",\
+        "packageDependencies": [\
+          ["@cryptography/aes", "npm:0.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@emotion/css-prettifier", [\
       ["npm:1.1.3", {\
         "packageLocation": "./.yarn/cache/@emotion-css-prettifier-npm-1.1.3-a02e878ac9-9ce3d7e585.zip/node_modules/@emotion/css-prettifier/",\
@@ -1578,6 +1622,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@monstrs/bigint-utils", [\
+      ["npm:0.0.2", {\
+        "packageLocation": "./.yarn/cache/@monstrs-bigint-utils-npm-0.0.2-a455020e5b-484837a22a.zip/node_modules/@monstrs/bigint-utils/",\
+        "packageDependencies": [\
+          ["@monstrs/bigint-utils", "npm:0.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@monstrs/buffer-utils", [\
+      ["npm:0.0.6", {\
+        "packageLocation": "./.yarn/cache/@monstrs-buffer-utils-npm-0.0.6-c95d7f3927-85245c0dc2.zip/node_modules/@monstrs/buffer-utils/",\
+        "packageDependencies": [\
+          ["@monstrs/buffer-utils", "npm:0.0.6"],\
+          ["@monstrs/bigint-utils", "npm:0.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@monstrs/config-eslint", [\
       ["npm:0.3.12", {\
         "packageLocation": "./.yarn/cache/@monstrs-config-eslint-npm-0.3.12-b8b11190f4-97da84713d.zip/node_modules/@monstrs/config-eslint/",\
@@ -1673,6 +1736,82 @@ const RAW_RUNTIME_STATE =
           ["ts-jest-resolver", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-codecs", [\
+      ["workspace:packages/mtproto-codecs", {\
+        "packageLocation": "./packages/mtproto-codecs/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-codecs", "workspace:packages/mtproto-codecs"],\
+          ["@monstrs/buffer-utils", "npm:0.0.6"],\
+          ["@monstrs/mtproto-core", "workspace:packages/mtproto-core"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-core", [\
+      ["workspace:packages/mtproto-core", {\
+        "packageLocation": "./packages/mtproto-core/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-core", "workspace:packages/mtproto-core"],\
+          ["@monstrs/buffer-utils", "npm:0.0.6"],\
+          ["@monstrs/mtproto-crypto", "workspace:packages/mtproto-crypto"],\
+          ["@monstrs/mtproto-extensions", "workspace:packages/mtproto-extensions"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-crypto", [\
+      ["workspace:packages/mtproto-crypto", {\
+        "packageLocation": "./packages/mtproto-crypto/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-crypto", "workspace:packages/mtproto-crypto"],\
+          ["@cryptography/aes", "npm:0.1.1"],\
+          ["@monstrs/buffer-utils", "npm:0.0.6"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-extensions", [\
+      ["workspace:packages/mtproto-extensions", {\
+        "packageLocation": "./packages/mtproto-extensions/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-extensions", "workspace:packages/mtproto-extensions"],\
+          ["@monstrs/buffer-utils", "npm:0.0.6"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-tl-core", [\
+      ["workspace:packages/mtproto-tl-core", {\
+        "packageLocation": "./packages/mtproto-tl-core/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-tl-core", "workspace:packages/mtproto-tl-core"],\
+          ["@monstrs/buffer-utils", "npm:0.0.6"],\
+          ["@monstrs/mtproto-extensions", "workspace:packages/mtproto-extensions"],\
+          ["@monstrs/mtproto-tl-types", "workspace:packages/mtproto-tl-types"],\
+          ["camelcase", "npm:8.0.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-tl-json-parser", [\
+      ["workspace:packages/mtproto-tl-json-parser", {\
+        "packageLocation": "./packages/mtproto-tl-json-parser/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-tl-json-parser", "workspace:packages/mtproto-tl-json-parser"],\
+          ["@monstrs/mtproto-tl-types", "workspace:packages/mtproto-tl-types"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@monstrs/mtproto-tl-types", [\
+      ["workspace:packages/mtproto-tl-types", {\
+        "packageLocation": "./packages/mtproto-tl-types/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-tl-types", "workspace:packages/mtproto-tl-types"]\
+        ],\
+        "linkType": "SOFT"\
       }]\
     ]],\
     ["@monstrs/tools-runtime", [\
@@ -3352,6 +3491,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/camelcase-npm-6.2.0-69f8c130ac-d9f403a615.zip/node_modules/camelcase/",\
         "packageDependencies": [\
           ["camelcase", "npm:6.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.0.0", {\
+        "packageLocation": "./.yarn/cache/camelcase-npm-8.0.0-a3fa03dcc3-56c5fe072f.zip/node_modules/camelcase/",\
+        "packageDependencies": [\
+          ["camelcase", "npm:8.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\

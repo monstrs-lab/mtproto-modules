@@ -653,6 +653,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cryptography/aes@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@cryptography/aes@npm:0.1.1"
+  checksum: cc736d1410a389c1b9bb84c38ed8ef72ada779cacc692d39762e9912014ee2c44c5f7d15c03655acb28b635eaa1d19fc75c6932e4d423fd0406ac4f175907212
+  languageName: node
+  linkType: hard
+
 "@emotion/css-prettifier@npm:^1.1.3":
   version: 1.1.3
   resolution: "@emotion/css-prettifier@npm:1.1.3"
@@ -1103,6 +1110,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monstrs/bigint-utils@npm:0.0.2":
+  version: 0.0.2
+  resolution: "@monstrs/bigint-utils@npm:0.0.2"
+  checksum: 484837a22afa6c23bb9c556edbb01e89b0c24e6594fa59e13c42a4c76589ea236eb5f0b66a6b50a4d2a6dd68c52aaed5210fc66e490430a872004a0ff7604a7f
+  languageName: node
+  linkType: hard
+
+"@monstrs/buffer-utils@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "@monstrs/buffer-utils@npm:0.0.6"
+  dependencies:
+    "@monstrs/bigint-utils": "npm:0.0.2"
+  checksum: 85245c0dc2f76a5b0e0656f0b41d16177a53a97851852611cd41ad6a7fc5656b83100e0f8963359729897577453a5d6ea3775d98536b247123ee892e09860a41
+  languageName: node
+  linkType: hard
+
 "@monstrs/config-eslint@npm:0.3.12":
   version: 0.3.12
   resolution: "@monstrs/config-eslint@npm:0.3.12"
@@ -1171,6 +1194,67 @@ __metadata:
   checksum: 67979c5237a5b8860079a8871b5a9198d5bc455fffb7de8f24e4c798b5fc52b57811a5ec169b0b2ca2da60ca742c0069739b6109ea7467ba42b5101c44faa00e
   languageName: node
   linkType: hard
+
+"@monstrs/mtproto-codecs@workspace:packages/mtproto-codecs":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-codecs@workspace:packages/mtproto-codecs"
+  dependencies:
+    "@monstrs/buffer-utils": "npm:^0.0.6"
+    "@monstrs/mtproto-core": "workspace:0.0.1"
+  languageName: unknown
+  linkType: soft
+
+"@monstrs/mtproto-core@workspace:0.0.1, @monstrs/mtproto-core@workspace:packages/mtproto-core":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-core@workspace:packages/mtproto-core"
+  dependencies:
+    "@monstrs/buffer-utils": "npm:^0.0.6"
+    "@monstrs/mtproto-crypto": "workspace:0.0.1"
+    "@monstrs/mtproto-extensions": "workspace:0.0.1"
+  languageName: unknown
+  linkType: soft
+
+"@monstrs/mtproto-crypto@workspace:0.0.1, @monstrs/mtproto-crypto@workspace:packages/mtproto-crypto":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-crypto@workspace:packages/mtproto-crypto"
+  dependencies:
+    "@cryptography/aes": "npm:^0.1.1"
+    "@monstrs/buffer-utils": "npm:^0.0.6"
+  languageName: unknown
+  linkType: soft
+
+"@monstrs/mtproto-extensions@workspace:0.0.1, @monstrs/mtproto-extensions@workspace:packages/mtproto-extensions":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-extensions@workspace:packages/mtproto-extensions"
+  dependencies:
+    "@monstrs/buffer-utils": "npm:^0.0.6"
+  languageName: unknown
+  linkType: soft
+
+"@monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core"
+  dependencies:
+    "@monstrs/buffer-utils": "npm:^0.0.6"
+    "@monstrs/mtproto-extensions": "workspace:0.0.1"
+    "@monstrs/mtproto-tl-types": "workspace:0.0.1"
+    camelcase: "npm:^8.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@monstrs/mtproto-tl-json-parser@workspace:packages/mtproto-tl-json-parser":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-tl-json-parser@workspace:packages/mtproto-tl-json-parser"
+  dependencies:
+    "@monstrs/mtproto-tl-types": "workspace:0.0.1"
+  languageName: unknown
+  linkType: soft
+
+"@monstrs/mtproto-tl-types@workspace:0.0.1, @monstrs/mtproto-tl-types@workspace:packages/mtproto-tl-types":
+  version: 0.0.0-use.local
+  resolution: "@monstrs/mtproto-tl-types@workspace:packages/mtproto-tl-types"
+  languageName: unknown
+  linkType: soft
 
 "@monstrs/tools-runtime@npm:^0.2.17":
   version: 0.2.17
@@ -2414,6 +2498,13 @@ __metadata:
   version: 6.2.0
   resolution: "camelcase@npm:6.2.0"
   checksum: d9f403a6153394c5bc68ec9c2672df1d04f00a7847708be12641b483b936cbfaaf14d891f92bb0026184e03923be24acd15a0476761e1286eec484d68f615fe5
+  languageName: node
+  linkType: hard
+
+"camelcase@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "camelcase@npm:8.0.0"
+  checksum: 56c5fe072f0523c9908cdaac21d4a3b3fb0f608fb2e9ba90a60e792b95dd3bb3d1f3523873ab17d86d146e94171305f73ef619e2f538bd759675bc4a14b4bff3
   languageName: node
   linkType: hard
 
