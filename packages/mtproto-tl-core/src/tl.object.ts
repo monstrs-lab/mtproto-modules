@@ -11,13 +11,15 @@ import camelcase                          from 'camelcase'
 
 import { serializeBytes }                 from './tl.utils.js'
 
-export abstract class TLObject {
+export abstract class TLObject<TLObjectValues extends Record<string, any>> {
   static CONSTRUCTOR_ID: number
 
   static PARAMS: Array<TLExtendedSchemaParam> = []
 
-  static readParamFromReader(
-    reader: BinaryReader<TLObject>,
+  constructor(public values: TLObjectValues) {}
+
+  static readParamFromReader<P extends Record<string, any>>(
+    reader: BinaryReader<TLObject<P>>,
     param: TLExtendedSchemaParam
   ): unknown {
     if (param.isVector) {
@@ -76,33 +78,38 @@ export abstract class TLObject {
     }
   }
 
-  static fromReader(reader: BinaryReader<TLObject>): TLObject {
+  static fromReader<P extends Record<string, any>>(reader: BinaryReader<TLObject<P>>): TLObject<P> {
     const values: Record<string, unknown> = {}
 
     for (const param of this.PARAMS) {
+      const name = camelcase(param.name, {
+        pascalCase: false,
+        preserveConsecutiveUppercase: true,
+      })
+
       if (param.isFlag) {
         const flagGroupSuffix = param.flagGroup > 1 ? param.flagGroup : ''
         const flagGroup: any = this.PARAMS.find((flag) => flag.name === `flags${flagGroupSuffix}`)
         const flagValue = flagGroup & (1 << param.flagIndex)
 
         if (param.type === 'true') {
-          values[param.name] = Boolean(flagValue)
+          values[name] = Boolean(flagValue)
 
           // eslint-disable-next-line no-continue
           continue
         }
 
-        values[param.name] = flagValue ? TLObject.readParamFromReader(reader, param) : undefined
+        values[name] = flagValue ? TLObject.readParamFromReader(reader, param) : undefined
       } else {
-        values[param.name] = TLObject.readParamFromReader(reader, param)
+        values[name] = TLObject.readParamFromReader(reader, param)
       }
     }
 
-    // @ts-expect-error
-    return new this.prototype.constructor(...Object.values(values)) as TLObject
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    return new (this.prototype.constructor as any)(values) as TLObject<P>
   }
 
-  fromReader(reader: BinaryReader<TLObject>): TLObject {
+  fromReader(reader: BinaryReader<TLObject<TLObjectValues>>): TLObject<TLObjectValues> {
     return (this.constructor as typeof TLObject).fromReader(reader)
   }
 
@@ -112,8 +119,7 @@ export abstract class TLObject {
       preserveConsecutiveUppercase: true,
     })
 
-    // @ts-expect-error
-    return this[name] as any as T
+    return this.values[name] as T
   }
 
   getParamValueBytes(paramValue: unknown, type: string): Buffer {
@@ -150,7 +156,7 @@ export abstract class TLObject {
         return fromDateToBuffer(paramValue as Date)
       default:
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-        return (paramValue as TLObject).getBytes() as Buffer
+        return (paramValue as TLObject<TLObjectValues>).getBytes() as Buffer
     }
   }
 
@@ -219,7 +225,7 @@ export abstract class TLObject {
       } else {
         buffers.push(this.getParamValueBytes(this.getParamValue<any>(param), param.type))
 
-        if (typeof this.getParamValue<TLObject>(param)?.getBytes === 'function') {
+        if (typeof this.getParamValue<TLObject<TLObjectValues>>(param)?.getBytes === 'function') {
           const boxed = param.type.charAt(param.type.indexOf('.') + 1)
 
           if (boxed !== boxed.toUpperCase()) {
