@@ -143,7 +143,7 @@ export class BinaryReader<
     return temp
   }
 
-  readObject(): Array<T> | T | boolean {
+  readObject<O extends T>(): Array<O> | O | boolean {
     const constructorId = this.readInt()
 
     const clazz = this.#schemaRegistry.get(constructorId)
@@ -167,7 +167,7 @@ export class BinaryReader<
           temp.push(this.readObject())
         }
 
-        return temp as Array<T>
+        return temp as Array<O>
       }
 
       if (clazz === undefined) {
@@ -178,6 +178,6 @@ export class BinaryReader<
       }
     }
 
-    return clazz.fromReader(this)
+    return clazz.fromReader(this) as O
   }
 }
