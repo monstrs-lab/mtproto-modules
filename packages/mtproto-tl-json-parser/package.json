@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-tl-json-parser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -17,7 +17,7 @@
     "postpack": "rm -rf dist"
   },
   "devDependencies": {
-    "@monstrs/mtproto-tl-types": "workspace:0.0.1"
+    "@monstrs/mtproto-tl-types": "workspace:0.0.2"
   },
   "publishConfig": {
     "exports": {

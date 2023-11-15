@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-tl-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -18,11 +18,11 @@
   },
   "dependencies": {
     "@monstrs/buffer-utils": "^0.0.6",
-    "@monstrs/mtproto-extensions": "workspace:0.0.1",
+    "@monstrs/mtproto-extensions": "workspace:0.0.2",
     "camelcase": "^8.0.0"
   },
   "devDependencies": {
-    "@monstrs/mtproto-tl-types": "workspace:0.0.1"
+    "@monstrs/mtproto-tl-types": "workspace:0.0.2"
   },
   "publishConfig": {
     "exports": {
