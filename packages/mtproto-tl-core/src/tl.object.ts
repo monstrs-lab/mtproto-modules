@@ -17,7 +17,7 @@ export abstract class TLObject {
   static PARAMS: Array<TLExtendedSchemaParam> = []
 
   static readParamFromReader(
-    reader: BinaryReader<typeof TLObject>,
+    reader: BinaryReader<TLObject>,
     param: TLExtendedSchemaParam
   ): unknown {
     if (param.isVector) {
@@ -76,7 +76,7 @@ export abstract class TLObject {
     }
   }
 
-  static fromReader(reader: BinaryReader<typeof TLObject>): typeof TLObject {
+  static fromReader(reader: BinaryReader<TLObject>): TLObject {
     const values: Record<string, unknown> = {}
 
     for (const param of this.PARAMS) {
@@ -100,6 +100,10 @@ export abstract class TLObject {
 
     // @ts-expect-error
     return new this.prototype.constructor(...Object.values(values)) as TLObject
+  }
+
+  fromReader(reader: BinaryReader<TLObject>): TLObject {
+    return (this.constructor as typeof TLObject).fromReader(reader)
   }
 
   getParamValue<T>(param: TLExtendedSchemaParam): T {
