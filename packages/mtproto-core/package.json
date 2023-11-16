@@ -19,6 +19,7 @@
   "dependencies": {
     "@monstrs/bigint-utils": "^0.0.2",
     "@monstrs/buffer-utils": "^0.0.6",
+    "@monstrs/mtproto-codecs": "workspace:0.0.7",
     "@monstrs/mtproto-crypto": "workspace:0.0.5",
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
   },
