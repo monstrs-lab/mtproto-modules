@@ -38,6 +38,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:packages/mtproto-tl-json-parser"\
     },\
     {\
+      "name": "@monstrs/mtproto-tl-to-typescript",\
+      "reference": "workspace:packages/mtproto-tl-to-typescript"\
+    },\
+    {\
       "name": "@monstrs/mtproto-tl-types",\
       "reference": "workspace:packages/mtproto-tl-types"\
     }\
@@ -51,6 +55,7 @@ const RAW_RUNTIME_STATE =
     ["@monstrs/mtproto-extensions", ["workspace:packages/mtproto-extensions"]],\
     ["@monstrs/mtproto-tl-core", ["workspace:packages/mtproto-tl-core"]],\
     ["@monstrs/mtproto-tl-json-parser", ["workspace:packages/mtproto-tl-json-parser"]],\
+    ["@monstrs/mtproto-tl-to-typescript", ["workspace:packages/mtproto-tl-to-typescript"]],\
     ["@monstrs/mtproto-tl-types", ["workspace:packages/mtproto-tl-types"]],\
     ["mtproto-modules", ["workspace:."]]\
   ],\
@@ -1805,6 +1810,22 @@ const RAW_RUNTIME_STATE =
         "linkType": "SOFT"\
       }]\
     ]],\
+    ["@monstrs/mtproto-tl-to-typescript", [\
+      ["workspace:packages/mtproto-tl-to-typescript", {\
+        "packageLocation": "./packages/mtproto-tl-to-typescript/",\
+        "packageDependencies": [\
+          ["@monstrs/mtproto-tl-to-typescript", "workspace:packages/mtproto-tl-to-typescript"],\
+          ["@monstrs/mtproto-tl-core", "workspace:packages/mtproto-tl-core"],\
+          ["@monstrs/mtproto-tl-json-parser", "workspace:packages/mtproto-tl-json-parser"],\
+          ["@monstrs/mtproto-tl-types", "workspace:packages/mtproto-tl-types"],\
+          ["camelcase", "npm:8.0.0"],\
+          ["commander", "npm:11.1.0"],\
+          ["decamelize", "npm:6.0.0"],\
+          ["ts-morph", "npm:20.0.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
     ["@monstrs/mtproto-tl-types", [\
       ["workspace:packages/mtproto-tl-types", {\
         "packageLocation": "./packages/mtproto-tl-types/",\
@@ -2178,6 +2199,19 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@svgr/core",\
           "@types/svgr__core"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@ts-morph/common", [\
+      ["npm:0.21.0", {\
+        "packageLocation": "./.yarn/cache/@ts-morph-common-npm-0.21.0-493913debc-1d7f544d62.zip/node_modules/@ts-morph/common/",\
+        "packageDependencies": [\
+          ["@ts-morph/common", "npm:0.21.0"],\
+          ["fast-glob", "npm:3.3.2"],\
+          ["minimatch", "npm:7.4.6"],\
+          ["mkdirp", "npm:2.1.6"],\
+          ["path-browserify", "npm:1.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3385,6 +3419,14 @@ const RAW_RUNTIME_STATE =
           ["concat-map", "npm:0.0.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.0.1", {\
+        "packageLocation": "./.yarn/cache/brace-expansion-npm-2.0.1-17aa2616f9-b358f2fe06.zip/node_modules/brace-expansion/",\
+        "packageDependencies": [\
+          ["brace-expansion", "npm:2.0.1"],\
+          ["balanced-match", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["braces", [\
@@ -3595,6 +3637,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["code-block-writer", [\
+      ["npm:12.0.0", {\
+        "packageLocation": "./.yarn/cache/code-block-writer-npm-12.0.0-943b9e5c78-ced73cdc46.zip/node_modules/code-block-writer/",\
+        "packageDependencies": [\
+          ["code-block-writer", "npm:12.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["code-point-at", [\
       ["npm:1.1.0", {\
         "packageLocation": "./.yarn/cache/code-point-at-npm-1.1.0-37de5fe566-33f6b23408.zip/node_modules/code-point-at/",\
@@ -3658,6 +3709,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["commander", [\
+      ["npm:11.1.0", {\
+        "packageLocation": "./.yarn/cache/commander-npm-11.1.0-56e979613c-13cc6ac875.zip/node_modules/commander/",\
+        "packageDependencies": [\
+          ["commander", "npm:11.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:2.20.3", {\
         "packageLocation": "./.yarn/cache/commander-npm-2.20.3-d8dcbaa39b-74c781a524.zip/node_modules/commander/",\
         "packageDependencies": [\
@@ -3794,6 +3852,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/supports-color",\
           "supports-color"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["decamelize", [\
+      ["npm:6.0.0", {\
+        "packageLocation": "./.yarn/cache/decamelize-npm-6.0.0-109b08ac0a-689888f5ea.zip/node_modules/decamelize/",\
+        "packageDependencies": [\
+          ["decamelize", "npm:6.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4873,6 +4940,18 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/fast-glob-npm-3.3.1-8045ff8f4d-b68431128f.zip/node_modules/fast-glob/",\
         "packageDependencies": [\
           ["fast-glob", "npm:3.3.1"],\
+          ["@nodelib/fs.stat", "npm:2.0.5"],\
+          ["@nodelib/fs.walk", "npm:1.2.8"],\
+          ["glob-parent", "npm:5.1.2"],\
+          ["merge2", "npm:1.4.1"],\
+          ["micromatch", "npm:4.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.3.2", {\
+        "packageLocation": "./.yarn/cache/fast-glob-npm-3.3.2-0a8cb4f2ca-42baad7b9c.zip/node_modules/fast-glob/",\
+        "packageDependencies": [\
+          ["fast-glob", "npm:3.3.2"],\
           ["@nodelib/fs.stat", "npm:2.0.5"],\
           ["@nodelib/fs.walk", "npm:1.2.8"],\
           ["glob-parent", "npm:5.1.2"],\
@@ -6905,6 +6984,14 @@ const RAW_RUNTIME_STATE =
           ["brace-expansion", "npm:1.1.11"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:7.4.6", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-7.4.6-f3feee458c-e587bf3d90.zip/node_modules/minimatch/",\
+        "packageDependencies": [\
+          ["minimatch", "npm:7.4.6"],\
+          ["brace-expansion", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["minimist", [\
@@ -6942,6 +7029,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/mkdirp-npm-1.0.4-37f6ef56b9-46ea0f3ffa.zip/node_modules/mkdirp/",\
         "packageDependencies": [\
           ["mkdirp", "npm:1.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.1.6", {\
+        "packageLocation": "./.yarn/cache/mkdirp-npm-2.1.6-832c38f12a-96f551c651.zip/node_modules/mkdirp/",\
+        "packageDependencies": [\
+          ["mkdirp", "npm:2.1.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7362,6 +7456,15 @@ const RAW_RUNTIME_STATE =
           ["error-ex", "npm:1.3.2"],\
           ["json-parse-even-better-errors", "npm:2.3.1"],\
           ["lines-and-columns", "npm:1.2.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["path-browserify", [\
+      ["npm:1.0.1", {\
+        "packageLocation": "./.yarn/cache/path-browserify-npm-1.0.1-f975d99a99-8b8c3fd5c6.zip/node_modules/path-browserify/",\
+        "packageDependencies": [\
+          ["path-browserify", "npm:1.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8579,6 +8682,17 @@ const RAW_RUNTIME_STATE =
           "@types/webpack",\
           "typescript",\
           "webpack"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["ts-morph", [\
+      ["npm:20.0.0", {\
+        "packageLocation": "./.yarn/cache/ts-morph-npm-20.0.0-8ba424c0d4-ce2f5b2f8b.zip/node_modules/ts-morph/",\
+        "packageDependencies": [\
+          ["ts-morph", "npm:20.0.0"],\
+          ["@ts-morph/common", "npm:0.21.0"],\
+          ["code-block-writer", "npm:12.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
