@@ -1110,7 +1110,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monstrs/bigint-utils@npm:0.0.2":
+"@monstrs/bigint-utils@npm:0.0.2, @monstrs/bigint-utils@npm:^0.0.2":
   version: 0.0.2
   resolution: "@monstrs/bigint-utils@npm:0.0.2"
   checksum: 484837a22afa6c23bb9c556edbb01e89b0c24e6594fa59e13c42a4c76589ea236eb5f0b66a6b50a4d2a6dd68c52aaed5210fc66e490430a872004a0ff7604a7f
@@ -1208,6 +1208,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-core@workspace:packages/mtproto-core"
   dependencies:
+    "@monstrs/bigint-utils": "npm:^0.0.2"
     "@monstrs/buffer-utils": "npm:^0.0.6"
     "@monstrs/mtproto-crypto": "workspace:0.0.5"
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
