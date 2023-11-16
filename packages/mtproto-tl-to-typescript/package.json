@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-tl-to-typescript",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -21,7 +21,7 @@
     "postpack": "rm -rf dist"
   },
   "dependencies": {
-    "@monstrs/mtproto-tl-core": "workspace:0.0.6",
+    "@monstrs/mtproto-tl-core": "workspace:0.0.7",
     "@monstrs/mtproto-tl-json-parser": "workspace:0.0.2",
     "@monstrs/mtproto-tl-types": "workspace:0.0.2",
     "camelcase": "^8.0.0",
