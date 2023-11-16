@@ -84,17 +84,19 @@ export class TLConstructorGenerator extends TLObjectGenerator {
     })
 
     schema.params.forEach((param) => {
+      const paramType = this.getTypeForParam(sourceFile, param)
+
       classDeclaration.addGetAccessor({
         name: camelcase(param.name, {
           pascalCase: false,
           preserveConsecutiveUppercase: true,
         }),
-        returnType: this.getTypeForParam(sourceFile, param),
+        returnType: paramType,
         statements: [
-          `return this.values.${camelcase(param.name, {
+          `return this.getParamValue<${paramType}>('${camelcase(param.name, {
             pascalCase: false,
             preserveConsecutiveUppercase: true,
-          })}`,
+          })}')`,
         ],
       })
     })
