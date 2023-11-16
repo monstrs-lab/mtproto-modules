@@ -30,4 +30,16 @@ export class MTProtoState {
   setHandshake(nonce: bigint, serverNonce: bigint): void {
     this.#handshake = new MTProtoHandshake(nonce, serverNonce)
   }
+
+  setHandshakeNewNonce(newNonce: bigint): void {
+    if (this.#handshake) {
+      this.#handshake.newNonce = newNonce
+    }
+  }
+
+  setHandshakeA(a: bigint): void {
+    if (this.#handshake) {
+      this.#handshake.a = a
+    }
+  }
 }
