@@ -1,6 +1,7 @@
 import type { TLExtendedSchemaParam } from '@monstrs/mtproto-tl-types'
 import type { SourceFile }            from 'ts-morph'
 
+import camelcase                      from 'camelcase'
 import decamelize                     from 'decamelize'
 
 export class TLObjectGenerator {
@@ -32,15 +33,34 @@ export class TLObjectGenerator {
   }
 
   resolveCustomTypeForParam(sourceFile: SourceFile, param: TLExtendedSchemaParam): string {
-    sourceFile.addImportDeclaration({
-      moduleSpecifier: `./${decamelize(param.type, {
-        separator: '-',
-        preserveConsecutiveUppercase: false,
-      })}.js`,
-      namedImports: [param.type],
+    const moduleSpecifier = `./${decamelize(param.type.replaceAll('_', '-'), {
+      separator: '-',
+      preserveConsecutiveUppercase: false,
+    })}.js`
+
+    const paramType = camelcase(param.type, {
+      pascalCase: true,
+      preserveConsecutiveUppercase: true,
     })
 
-    return param.type
+    if (
+      !sourceFile
+        .getImportDeclarations()
+        .find(
+          (importDeclaration) =>
+            importDeclaration.getModuleSpecifierValue() === moduleSpecifier &&
+            importDeclaration
+              .getNamedImports()
+              .find((importSpecifier) => importSpecifier.getText() === paramType)
+        )
+    ) {
+      sourceFile.addImportDeclaration({
+        moduleSpecifier,
+        namedImports: [paramType],
+      })
+    }
+
+    return paramType
   }
 
   resolveTypeForParam(sourceFile: SourceFile, param: TLExtendedSchemaParam): string {
