@@ -46,7 +46,7 @@ export class MTProtoKeyPair {
     return new MTProtoKeyPair(key, iv)
   }
 
-  static generateKeyDataFromNonce(serverNonce: bigint, newNonce: bigint): MTProtoKeyPair {
+  static fromNonce(serverNonce: bigint, newNonce: bigint): MTProtoKeyPair {
     const serverNonceBuffer = fromBigIntToSignedLittleBuffer(serverNonce, 16)
     const newNonceBuffer = fromBigIntToSignedLittleBuffer(newNonce, 32)
 
@@ -62,8 +62,8 @@ export class MTProtoKeyPair {
         .digest(),
     ]
 
-    const key = Buffer.concat([hash1, hash2.slice(0, 12)])
-    const iv = Buffer.concat([hash2.slice(12, 20), hash3, newNonceBuffer.subarray(0, 4)])
+    const key = Buffer.concat([hash1, hash2.subarray(0, 12)])
+    const iv = Buffer.concat([hash2.subarray(12, 20), hash3, newNonceBuffer.subarray(0, 4)])
 
     return new MTProtoKeyPair(key, iv)
   }
