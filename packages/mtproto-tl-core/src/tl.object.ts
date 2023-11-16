@@ -117,8 +117,8 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
     return (this.constructor as typeof TLObject).fromReader(reader)
   }
 
-  getParamValue<T>(param: TLExtendedSchemaParam): T {
-    const name = camelcase(param.name, {
+  getParamValue<T>(paramName: string): T {
+    const name = camelcase(paramName, {
       pascalCase: false,
       preserveConsecutiveUppercase: true,
     })
@@ -177,8 +177,8 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
     for (const param of params) {
       if (param.isFlag) {
         if (
-          (this.getParamValue<boolean>(param) === false && param.type === 'true') ||
-          this.getParamValue<boolean>(param) === undefined
+          (this.getParamValue<boolean>(param.name) === false && param.type === 'true') ||
+          this.getParamValue<boolean>(param.name) === undefined
         ) {
           // eslint-disable-next-line no-continue
           continue
@@ -192,12 +192,12 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
 
         const vectorLength = Buffer.alloc(4)
 
-        vectorLength.writeInt32LE(this.getParamValue<Array<any>>(param).length, 0)
+        vectorLength.writeInt32LE(this.getParamValue<Array<any>>(param.name).length, 0)
 
         buffers.push(
           vectorLength,
           Buffer.concat(
-            this.getParamValue<Array<any>>(param).map((v: any) =>
+            this.getParamValue<Array<any>>(param.name).map((v: any) =>
               this.getParamValueBytes(v, param.type))
           )
         )
@@ -210,8 +210,9 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
           for (const flagParam of params) {
             if (flagParam.isFlag) {
               if (
-                (this.getParamValue<boolean>(flagParam) === false && flagParam.type === 'true') ||
-                this.getParamValue<boolean>(flagParam) === undefined
+                (this.getParamValue<boolean>(flagParam.name) === false &&
+                  flagParam.type === 'true') ||
+                this.getParamValue<boolean>(flagParam.name) === undefined
               ) {
                 flagCalculate |= 0
               } else {
@@ -227,9 +228,11 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
           buffers.push(flagBuffer)
         }
       } else {
-        buffers.push(this.getParamValueBytes(this.getParamValue<any>(param), param.type))
+        buffers.push(this.getParamValueBytes(this.getParamValue<any>(param.name), param.type))
 
-        if (typeof this.getParamValue<TLObject<TLObjectValues>>(param)?.getBytes === 'function') {
+        if (
+          typeof this.getParamValue<TLObject<TLObjectValues>>(param.name)?.getBytes === 'function'
+        ) {
           const boxed = param.type.charAt(param.type.indexOf('.') + 1)
 
           if (boxed !== boxed.toUpperCase()) {
