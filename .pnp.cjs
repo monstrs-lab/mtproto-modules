@@ -1759,6 +1759,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/mtproto-core/",\
         "packageDependencies": [\
           ["@monstrs/mtproto-core", "workspace:packages/mtproto-core"],\
+          ["@monstrs/bigint-utils", "npm:0.0.2"],\
           ["@monstrs/buffer-utils", "npm:0.0.6"],\
           ["@monstrs/mtproto-crypto", "workspace:packages/mtproto-crypto"],\
           ["@monstrs/mtproto-extensions", "workspace:packages/mtproto-extensions"]\
