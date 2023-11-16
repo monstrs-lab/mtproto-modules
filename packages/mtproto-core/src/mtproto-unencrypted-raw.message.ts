@@ -1,11 +1,13 @@
+import { MTProtoMessageId } from './mtproto-message-id.js'
+
 export class MTProtoUnencryptedRawMessage {
-  #messageId: bigint
+  #messageId: MTProtoMessageId
 
   #messageLength: number
 
   #messageData: Buffer
 
-  constructor(messageId: bigint, messageLength: number, messageData: Buffer) {
+  constructor(messageId: MTProtoMessageId, messageLength: number, messageData: Buffer) {
     this.#messageId = messageId
     this.#messageLength = messageLength
     this.#messageData = messageData
@@ -24,7 +26,11 @@ export class MTProtoUnencryptedRawMessage {
       throw new Error('Bad message length')
     }
 
-    return new MTProtoUnencryptedRawMessage(messageId, messageLength, messageData)
+    return new MTProtoUnencryptedRawMessage(
+      new MTProtoMessageId(messageId),
+      messageLength,
+      messageData
+    )
   }
 
   encode(): Buffer {
@@ -33,7 +39,7 @@ export class MTProtoUnencryptedRawMessage {
     const messageLength = Buffer.alloc(4)
 
     authKeyId.writeBigUint64LE(BigInt(0))
-    messageId.writeBigUInt64LE(this.#messageId)
+    messageId.writeBigUInt64LE(this.#messageId.value)
     messageLength.writeUInt32LE(this.#messageLength)
 
     return Buffer.concat([authKeyId, messageId, messageLength, this.#messageData])
@@ -43,7 +49,7 @@ export class MTProtoUnencryptedRawMessage {
     return this.#messageData
   }
 
-  getMessageId(): bigint {
+  getMessageId(): MTProtoMessageId {
     return this.#messageId
   }
 }
