@@ -1,10 +1,8 @@
-import { createHash }                                                             from 'node:crypto'
+import { createHash }                     from 'node:crypto'
 
-import { fromBigIntToSignedLittleBuffer }                                         from '@monstrs/buffer-utils'
-
-import { fromBigIntToBuffer }                     from '@monstrs/buffer-utils'
-
-import { fromBufferToBigInt } from '@monstrs/buffer-utils'
+import { fromBigIntToSignedLittleBuffer } from '@monstrs/buffer-utils'
+import { fromBigIntToBuffer }             from '@monstrs/buffer-utils'
+import { fromBufferToBigInt }             from '@monstrs/buffer-utils'
 
 export const calculateNonceHash = (nonce: bigint, hash: bigint, num: number): bigint => {
   const nonceBuffer = fromBigIntToSignedLittleBuffer(nonce, 32)
