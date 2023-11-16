@@ -16,7 +16,11 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
 
   static PARAMS: Array<TLExtendedSchemaParam> = []
 
-  constructor(public values: TLObjectValues) {}
+  #values: TLObjectValues
+
+  constructor(values: TLObjectValues) {
+    this.#values = values
+  }
 
   static readParamFromReader<P extends Record<string, any>>(
     reader: BinaryReader<TLObject<P>>,
@@ -119,7 +123,7 @@ export abstract class TLObject<TLObjectValues extends Record<string, any>> {
       preserveConsecutiveUppercase: true,
     })
 
-    return this.values[name] as T
+    return this.#values[name] as T
   }
 
   getParamValueBytes(paramValue: unknown, type: string): Buffer {
