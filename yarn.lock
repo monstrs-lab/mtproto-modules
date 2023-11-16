@@ -1195,7 +1195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monstrs/mtproto-codecs@workspace:packages/mtproto-codecs":
+"@monstrs/mtproto-codecs@workspace:0.0.7, @monstrs/mtproto-codecs@workspace:packages/mtproto-codecs":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-codecs@workspace:packages/mtproto-codecs"
   dependencies:
@@ -1210,6 +1210,7 @@ __metadata:
   dependencies:
     "@monstrs/bigint-utils": "npm:^0.0.2"
     "@monstrs/buffer-utils": "npm:^0.0.6"
+    "@monstrs/mtproto-codecs": "workspace:0.0.7"
     "@monstrs/mtproto-crypto": "workspace:0.0.5"
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
   languageName: unknown
