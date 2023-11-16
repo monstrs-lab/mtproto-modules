@@ -1,12 +1,13 @@
 import type { MTProtoRawMessageContext } from '@monstrs/mtproto-core'
 import type { MTProtoRawMessage }        from '@monstrs/mtproto-core'
+import type { MTProtoCodec }             from '@monstrs/mtproto-core'
 import type { Cipher }                   from 'node:crypto'
 
 import { createCipheriv }                from 'node:crypto'
 
 import { MTProtoAbridgedCodec }          from './mtproto-abridged.codec.js'
 
-export class MTProtoObfuscadetCodec {
+export class MTProtoObfuscadetCodec implements MTProtoCodec {
   protected decryptor: Cipher
 
   protected encryptor: Cipher
