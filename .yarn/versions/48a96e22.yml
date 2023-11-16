@@ -1,0 +1,6 @@
+releases:
+  "@monstrs/mtproto-codecs": patch
+  "@monstrs/mtproto-core": patch
+  "@monstrs/mtproto-crypto": patch
+  "@monstrs/mtproto-tl-core": patch
+  "@monstrs/mtproto-tl-to-typescript": patch
