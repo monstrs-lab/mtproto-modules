@@ -1200,21 +1200,21 @@ __metadata:
   resolution: "@monstrs/mtproto-codecs@workspace:packages/mtproto-codecs"
   dependencies:
     "@monstrs/buffer-utils": "npm:^0.0.6"
-    "@monstrs/mtproto-core": "workspace:0.0.4"
+    "@monstrs/mtproto-core": "workspace:0.0.5"
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-core@workspace:0.0.4, @monstrs/mtproto-core@workspace:packages/mtproto-core":
+"@monstrs/mtproto-core@workspace:0.0.5, @monstrs/mtproto-core@workspace:packages/mtproto-core":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-core@workspace:packages/mtproto-core"
   dependencies:
     "@monstrs/buffer-utils": "npm:^0.0.6"
-    "@monstrs/mtproto-crypto": "workspace:0.0.3"
+    "@monstrs/mtproto-crypto": "workspace:0.0.4"
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-crypto@workspace:0.0.3, @monstrs/mtproto-crypto@workspace:packages/mtproto-crypto":
+"@monstrs/mtproto-crypto@workspace:0.0.4, @monstrs/mtproto-crypto@workspace:packages/mtproto-crypto":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-crypto@workspace:packages/mtproto-crypto"
   dependencies:
