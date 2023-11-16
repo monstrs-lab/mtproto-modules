@@ -8,7 +8,7 @@ import { program }        from 'commander'
 import { TLToTypeScript } from './tl-to-typescript.js'
 
 program
-  .option('-s, --schema [...schemas]', 'Input schema')
+  .option('-s, --schema [schemas...]', 'Input schema')
   .option('-o, --output <output>', 'Output directory')
 
 program.parse()
