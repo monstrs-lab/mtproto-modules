@@ -10,6 +10,8 @@ export class MTProtoState {
 
   #handshake?: MTProtoHandshake
 
+  #sessionId?: bigint
+
   constructor(codec: MTProtoCodec, authKeyManager: MTProtoAuthKeyManager) {
     this.#codec = codec
     this.#authKeyManager = authKeyManager
@@ -27,6 +29,10 @@ export class MTProtoState {
     return this.#handshake
   }
 
+  get sessionId(): bigint | undefined {
+    return this.#sessionId
+  }
+
   setHandshake(nonce: bigint, serverNonce: bigint): void {
     this.#handshake = new MTProtoHandshake(nonce, serverNonce)
   }
@@ -41,5 +47,9 @@ export class MTProtoState {
     if (this.#handshake) {
       this.#handshake.a = a
     }
+  }
+
+  setSessionId(sessionId: bigint): void {
+    this.#sessionId = sessionId
   }
 }
