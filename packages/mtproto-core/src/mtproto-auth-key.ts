@@ -1,6 +1,4 @@
-import { createHash }   from 'crypto'
-
-import { BinaryReader } from '@monstrs/mtproto-extensions'
+import { createHash } from 'node:crypto'
 
 export class MTProtoAuthKey {
   #key: Buffer
@@ -14,14 +12,8 @@ export class MTProtoAuthKey {
   constructor(value: Buffer) {
     this.#key = value
     this.#hash = createHash('sha1').update(value).digest()
-
-    const reader = new BinaryReader(this.#hash, new Map())
-
-    this.#auxHash = reader.readLong(false)
-
-    reader.read(4)
-
-    this.#id = reader.readLong(false)
+    this.#auxHash = this.#hash.readBigUInt64LE(0)
+    this.#id = this.#hash.readBigUInt64LE(12)
   }
 
   get key(): Buffer {
