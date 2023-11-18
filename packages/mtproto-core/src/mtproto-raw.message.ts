@@ -1,5 +1,6 @@
 import type { MTProtoAuthKeyManager }   from './mtproto-auth-key.manager.js'
 
+import { InvalidAuthKeyIdError }        from './errors/index.js'
 import { MTProtoEncryptedRawMessage }   from './mtproto-encrypted-raw.message.js'
 import { MTProtoUnencryptedRawMessage } from './mtproto-unencrypted-raw.message.js'
 
@@ -28,6 +29,12 @@ export class MTProtoRawMessage {
 
     if (authKeyId === BigInt(0)) {
       return new MTProtoRawMessage(authKeyId, await MTProtoUnencryptedRawMessage.decode(payload))
+    }
+
+    const authKey = await context.authKeyManager.getAuthKey(authKeyId)
+
+    if (!authKey) {
+      throw new InvalidAuthKeyIdError(authKeyId)
     }
 
     return new MTProtoRawMessage(
