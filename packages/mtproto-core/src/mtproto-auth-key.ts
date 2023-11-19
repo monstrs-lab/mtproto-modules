@@ -1,4 +1,6 @@
-import { createHash } from 'node:crypto'
+import { createHash }         from 'node:crypto'
+
+import { fromBufferToBigInt } from '@monstrs/buffer-utils'
 
 export class MTProtoAuthKey {
   #key: Buffer
@@ -12,7 +14,7 @@ export class MTProtoAuthKey {
   constructor(value: Buffer) {
     this.#key = value
     this.#hash = createHash('sha1').update(value).digest()
-    this.#auxHash = this.#hash.readBigUInt64LE(0)
+    this.#auxHash = fromBufferToBigInt(this.#hash.subarray(0, 8), true, false)
     this.#id = this.#hash.readBigUInt64LE(12)
   }
 
