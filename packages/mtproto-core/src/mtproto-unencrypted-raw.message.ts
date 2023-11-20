@@ -1,19 +1,32 @@
-import { MTProtoMessageId } from './mtproto-message-id.js'
+import type { MTProtoAuthKey } from './mtproto-auth-key.js'
+
+import { MTProtoMessageId }    from './mtproto-message-id.js'
 
 export class MTProtoUnencryptedRawMessage {
+  #authKey: MTProtoAuthKey
+
   #messageId: MTProtoMessageId
 
   #messageLength: number
 
   #messageData: Buffer
 
-  constructor(messageId: MTProtoMessageId, messageLength: number, messageData: Buffer) {
+  constructor(
+    authKey: MTProtoAuthKey,
+    messageId: MTProtoMessageId,
+    messageLength: number,
+    messageData: Buffer
+  ) {
+    this.#authKey = authKey
     this.#messageId = messageId
     this.#messageLength = messageLength
     this.#messageData = messageData
   }
 
-  static async decode(payload: Buffer): Promise<MTProtoUnencryptedRawMessage> {
+  static async decode(
+    authKey: MTProtoAuthKey,
+    payload: Buffer
+  ): Promise<MTProtoUnencryptedRawMessage> {
     const messageId = payload.readBigUint64LE(8)
     const messageLength = payload.readUInt32LE(16)
     const messageData = payload.subarray(20, payload.length)
@@ -27,6 +40,7 @@ export class MTProtoUnencryptedRawMessage {
     }
 
     return new MTProtoUnencryptedRawMessage(
+      authKey,
       new MTProtoMessageId(messageId),
       messageLength,
       messageData
@@ -43,6 +57,10 @@ export class MTProtoUnencryptedRawMessage {
     messageLength.writeUInt32LE(this.#messageLength)
 
     return Buffer.concat([authKeyId, messageId, messageLength, this.#messageData])
+  }
+
+  getAuthKey(): MTProtoAuthKey {
+    return this.#authKey
   }
 
   getMessageData(): Buffer {
