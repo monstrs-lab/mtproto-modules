@@ -1,6 +1,7 @@
 import type { MTProtoAuthKeyManager }   from './mtproto-auth-key.manager.js'
 
 import { InvalidAuthKeyIdError }        from './errors/index.js'
+import { MTProtoAuthKey }               from './mtproto-auth-key.js'
 import { MTProtoEncryptedRawMessage }   from './mtproto-encrypted-raw.message.js'
 import { MTProtoUnencryptedRawMessage } from './mtproto-unencrypted-raw.message.js'
 
@@ -9,15 +10,9 @@ export interface MTProtoRawMessageContext {
 }
 
 export class MTProtoRawMessage {
-  #authKeyId: bigint
-
   #message: MTProtoEncryptedRawMessage | MTProtoUnencryptedRawMessage
 
-  constructor(
-    authKeyId: bigint,
-    message: MTProtoEncryptedRawMessage | MTProtoUnencryptedRawMessage
-  ) {
-    this.#authKeyId = authKeyId
+  constructor(message: MTProtoEncryptedRawMessage | MTProtoUnencryptedRawMessage) {
     this.#message = message
   }
 
@@ -27,8 +22,10 @@ export class MTProtoRawMessage {
   ): Promise<MTProtoRawMessage> {
     const authKeyId = payload.readBigUint64LE(0)
 
-    if (authKeyId === BigInt(0)) {
-      return new MTProtoRawMessage(authKeyId, await MTProtoUnencryptedRawMessage.decode(payload))
+    if (authKeyId === 0n) {
+      return new MTProtoRawMessage(
+        await MTProtoUnencryptedRawMessage.decode(new MTProtoAuthKey(), payload)
+      )
     }
 
     const authKey = await context.authKeyManager.getAuthKey(authKeyId)
@@ -37,10 +34,7 @@ export class MTProtoRawMessage {
       throw new InvalidAuthKeyIdError(authKeyId)
     }
 
-    return new MTProtoRawMessage(
-      authKeyId,
-      await MTProtoEncryptedRawMessage.decode(payload, context)
-    )
+    return new MTProtoRawMessage(await MTProtoEncryptedRawMessage.decode(authKey, payload))
   }
 
   encode(): Buffer {
@@ -48,7 +42,7 @@ export class MTProtoRawMessage {
   }
 
   getAuthKeyId(): bigint {
-    return this.#authKeyId
+    return this.#message.getAuthKey().id
   }
 
   getMessage(): MTProtoEncryptedRawMessage | MTProtoUnencryptedRawMessage {
