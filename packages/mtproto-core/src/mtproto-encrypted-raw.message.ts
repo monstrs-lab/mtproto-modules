@@ -3,8 +3,6 @@ import type { MTProtoAuthKey } from './mtproto-auth-key.js'
 import { createHash }          from 'node:crypto'
 import { randomBytes }         from 'node:crypto'
 
-import { fromBigIntToBuffer }  from '@monstrs/buffer-utils'
-
 import { IGE }                 from '@monstrs/mtproto-crypto'
 
 import { MTProtoKeyPair }      from './mtproto-key-pair.js'
@@ -53,8 +51,12 @@ export class MTProtoEncryptedRawMessage {
       MTProtoKeyPairType.SERVER
     )
 
+    const authKeyId = Buffer.alloc(8)
+
+    authKeyId.writeBigInt64LE(this.#authKey.id, 0)
+
     return Buffer.concat([
-      fromBigIntToBuffer(this.#authKey.id, 8),
+      authKeyId,
       messageKey,
       new IGE(keyPair.key, keyPair.iv).encrypt(Buffer.concat([this.#messageData, padding])),
     ])
