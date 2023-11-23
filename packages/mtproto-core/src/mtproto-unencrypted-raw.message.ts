@@ -27,7 +27,7 @@ export class MTProtoUnencryptedRawMessage {
     authKey: MTProtoAuthKey,
     payload: Buffer
   ): Promise<MTProtoUnencryptedRawMessage> {
-    const messageId = payload.readBigInt64LE(8)
+    const messageId = payload.readBigInt64BE(8)
     const messageLength = payload.readUInt32LE(16)
     const messageData = payload.subarray(20, payload.length)
 
