@@ -1,0 +1,3 @@
+releases:
+  "@monstrs/mtproto-codecs": patch
+  "@monstrs/mtproto-core": patch
