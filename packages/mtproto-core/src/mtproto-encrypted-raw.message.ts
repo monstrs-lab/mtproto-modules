@@ -26,7 +26,7 @@ export class MTProtoEncryptedRawMessage {
     authKey: MTProtoAuthKey,
     payload: Buffer
   ): Promise<MTProtoEncryptedRawMessage> {
-    const keyPair = MTProtoKeyPair.fromAuthAndMsgKey(
+    const keyPair = MTProtoKeyPair.fromAuthAndMessageKey(
       authKey,
       payload.subarray(8, 24),
       MTProtoKeyPairType.CLIENT
@@ -47,7 +47,7 @@ export class MTProtoEncryptedRawMessage {
       .digest()
     const messageKey = messageKeyLarge.subarray(8, 24)
 
-    const keyPair = MTProtoKeyPair.fromAuthAndMsgKey(
+    const keyPair = MTProtoKeyPair.fromAuthAndMessageKey(
       this.#authKey,
       messageKey,
       MTProtoKeyPairType.SERVER

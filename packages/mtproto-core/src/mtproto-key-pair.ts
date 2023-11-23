@@ -15,7 +15,7 @@ export class MTProtoKeyPair {
     public readonly iv: Buffer
   ) {}
 
-  static fromAuthAndMsgKey(
+  static fromAuthAndMessageKey(
     authKey: MTProtoAuthKey,
     msgKey: Buffer,
     keyType: MTProtoKeyPairType = MTProtoKeyPairType.SERVER
