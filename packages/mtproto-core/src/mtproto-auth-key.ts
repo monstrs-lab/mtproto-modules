@@ -16,7 +16,7 @@ export class MTProtoAuthKey {
       this.#key = value
       this.#hash = createHash('sha1').update(value).digest()
       this.#auxHash = fromBufferToBigInt(this.#hash.subarray(0, 8), true, false)
-      this.#id = this.#hash.readBigUInt64BE(12)
+      this.#id = this.#hash.readBigInt64LE(12)
     } else {
       this.#key = Buffer.alloc(0)
       this.#hash = Buffer.alloc(0)
