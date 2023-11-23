@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-codecs",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@monstrs/buffer-utils": "^0.0.6",
-    "@monstrs/mtproto-core": "workspace:0.0.16"
+    "@monstrs/mtproto-core": "workspace:0.0.17"
   },
   "publishConfig": {
     "exports": {
