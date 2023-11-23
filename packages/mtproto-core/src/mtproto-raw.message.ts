@@ -20,7 +20,7 @@ export class MTProtoRawMessage {
     payload: Buffer,
     context: MTProtoRawMessageContext
   ): Promise<MTProtoRawMessage> {
-    const authKeyId = payload.readBigUint64LE(0)
+    const authKeyId = payload.readBigInt64LE(0)
 
     if (authKeyId === 0n) {
       return new MTProtoRawMessage(
