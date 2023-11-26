@@ -53,7 +53,7 @@ export class MTProtoEncryptedRawMessage {
 
     const authKeyId = Buffer.alloc(8)
 
-    authKeyId.writeBigInt64BE(this.#authKey.id, 0)
+    authKeyId.writeBigInt64BE(this.#authKey.authKeyId, 0)
 
     return Buffer.concat([
       authKeyId,
