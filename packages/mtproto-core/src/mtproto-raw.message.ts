@@ -42,7 +42,7 @@ export class MTProtoRawMessage {
   }
 
   getAuthKeyId(): bigint {
-    return this.#message.getAuthKey().id
+    return this.#message.getAuthKey().authKeyId
   }
 
   getMessage(): MTProtoEncryptedRawMessage | MTProtoUnencryptedRawMessage {
