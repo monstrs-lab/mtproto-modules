@@ -4,10 +4,10 @@ import { randomBytes }        from 'node:crypto'
 import { fromBufferToBigInt } from '@monstrs/buffer-utils'
 
 export enum MTProtoAuthKeyType {
-  UNKNOWN = -1,
-  PERM = 0,
-  TEMP = 1,
-  MEDIA_TEMP = 2,
+  UNKNOWN = 0,
+  PERM = 1,
+  TEMP = 2,
+  MEDIA_TEMP = 3,
 }
 
 export class MTProtoAuthKey {
