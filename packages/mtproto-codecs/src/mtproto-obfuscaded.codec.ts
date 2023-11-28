@@ -1,11 +1,9 @@
-import type { MTProtoRawMessageContext } from '@monstrs/mtproto-core'
-import type { MTProtoRawMessage }        from '@monstrs/mtproto-core'
-import type { MTProtoCodec }             from '@monstrs/mtproto-core'
-import type { Cipher }                   from 'node:crypto'
+import type { MTProtoCodec }    from '@monstrs/mtproto-core'
+import type { Cipher }          from 'node:crypto'
 
-import { createCipheriv }                from 'node:crypto'
+import { createCipheriv }       from 'node:crypto'
 
-import { MTProtoAbridgedCodec }          from './mtproto-abridged.codec.js'
+import { MTProtoAbridgedCodec } from './mtproto-abridged.codec.js'
 
 export class MTProtoObfuscadetCodec implements MTProtoCodec {
   protected decryptor: Cipher
@@ -39,11 +37,11 @@ export class MTProtoObfuscadetCodec implements MTProtoCodec {
     this.codec = new MTProtoAbridgedCodec()
   }
 
-  async receive(payload: Buffer, context: MTProtoRawMessageContext): Promise<MTProtoRawMessage> {
-    return this.codec.receive(this.decryptor.update(payload), context)
+  async receive(payload: Buffer): Promise<Buffer> {
+    return this.codec.receive(this.decryptor.update(payload))
   }
 
-  async send(message: MTProtoRawMessage): Promise<Buffer> {
-    return this.encryptor.update(await this.codec.send(message.encode()))
+  async send(data: Buffer): Promise<Buffer> {
+    return this.encryptor.update(await this.codec.send(data))
   }
 }
