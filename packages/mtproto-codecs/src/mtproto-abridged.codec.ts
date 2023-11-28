@@ -1,13 +1,9 @@
 /* eslint-disable no-bitwise */
 
-import type { MTProtoRawMessageContext } from '@monstrs/mtproto-core'
-
-import { fromBigIntToBuffer }            from '@monstrs/buffer-utils'
-
-import { MTProtoRawMessage }             from '@monstrs/mtproto-core'
+import { fromBigIntToBuffer } from '@monstrs/buffer-utils'
 
 export class MTProtoAbridgedCodec {
-  async receive(payload: Buffer, context: MTProtoRawMessageContext): Promise<MTProtoRawMessage> {
+  async receive(payload: Buffer): Promise<Buffer> {
     let length = payload[0]
 
     if (length >= 127) {
@@ -16,7 +12,7 @@ export class MTProtoAbridgedCodec {
 
     const data = payload.subarray(1, (length << 2) + 1)
 
-    return MTProtoRawMessage.decode(data, context)
+    return data
   }
 
   async send(data: Buffer): Promise<Buffer> {
