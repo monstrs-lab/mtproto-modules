@@ -1,36 +1,26 @@
-/* eslint-disable no-bitwise */
-
 import { fromBigIntToBuffer } from '@monstrs/buffer-utils'
 
 export class MTProtoAbridgedCodec {
   async receive(payload: Buffer): Promise<Buffer> {
-    let length = payload[0]
+    if (payload.subarray(0, 1).equals(Buffer.from('7f', 'hex'))) {
+      const length = Buffer.concat([payload.subarray(1, 4), Buffer.alloc(1)]).readInt32LE(0) * 4
 
-    if (length >= 127) {
-      length = Buffer.concat([payload.subarray(0, 3), Buffer.alloc(1)]).readInt32LE(0)
+      return payload.subarray(4, length + 4)
     }
 
-    const data = payload.subarray(1, (length << 2) + 1)
-
-    return data
+    return payload.subarray(1, payload[0] * 4 + 1)
   }
 
   async send(data: Buffer): Promise<Buffer> {
-    const length = data.length >> 2
+    const length = Math.round(data.length / 4)
 
     if (length < 127) {
-      const lengthBuffer = Buffer.alloc(1)
-
-      lengthBuffer.writeUInt8(length, 0)
-
-      return Buffer.concat([lengthBuffer, data])
+      Buffer.concat([Buffer.from([length]), data])
     }
 
-    const lengthBuffer = Buffer.concat([
-      Buffer.from('7f', 'hex'),
-      fromBigIntToBuffer(BigInt(length), 3),
+    return Buffer.concat([
+      Buffer.concat([Buffer.from('7f', 'hex'), fromBigIntToBuffer(BigInt(length), 3)]),
+      data,
     ])
-
-    return Buffer.concat([lengthBuffer, data])
   }
 }
