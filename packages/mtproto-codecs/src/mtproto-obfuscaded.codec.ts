@@ -41,7 +41,7 @@ export class MTProtoObfuscadetCodec implements MTProtoCodec {
     this.codec = new MTProtoAbridgedCodec()
   }
 
-  async init(): Promise<MTProtoObfuscadetCodec> {
+  static async init(): Promise<MTProtoObfuscadetCodec> {
     const keywords = [
       Buffer.from('50567247', 'hex'),
       Buffer.from('474554', 'hex'),
