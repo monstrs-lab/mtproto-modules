@@ -1,6 +1,8 @@
 import { fromBigIntToBuffer } from '@monstrs/buffer-utils'
 
-export class MTProtoAbridgedCodec {
+export class MTProtoAbridgedTransport {
+  static OBFUSCATED_TAG = Buffer.from('efefefef', 'hex')
+
   async receive(payload: Buffer): Promise<Buffer> {
     if (payload.subarray(0, 1).equals(Buffer.from('7f', 'hex'))) {
       const length = Buffer.concat([payload.subarray(1, 4), Buffer.alloc(1)]).readInt32LE(0) * 4

@@ -20,6 +20,9 @@
     "@monstrs/buffer-utils": "^0.0.6",
     "@monstrs/mtproto-core": "workspace:0.0.24"
   },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0"
+  },
   "publishConfig": {
     "exports": {
       "./package.json": "./package.json",

@@ -1748,6 +1748,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/mtproto-codecs/",\
         "packageDependencies": [\
           ["@monstrs/mtproto-codecs", "workspace:packages/mtproto-codecs"],\
+          ["@jest/globals", "npm:29.7.0"],\
           ["@monstrs/buffer-utils", "npm:0.0.6"],\
           ["@monstrs/mtproto-core", "workspace:packages/mtproto-core"]\
         ],\

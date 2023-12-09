@@ -1199,6 +1199,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-codecs@workspace:packages/mtproto-codecs"
   dependencies:
+    "@jest/globals": "npm:^29.7.0"
     "@monstrs/buffer-utils": "npm:^0.0.6"
     "@monstrs/mtproto-core": "workspace:0.0.24"
   languageName: unknown
