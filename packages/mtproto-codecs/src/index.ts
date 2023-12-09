@@ -1,2 +1,2 @@
-export * from './mtproto-obfuscaded.codec.js'
-export * from './mtproto-abridged.codec.js'
+export * from './mtproto-obfuscated.codec.js'
+export * from './mtproto-abridged.transport.js'
