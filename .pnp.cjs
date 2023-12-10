@@ -1733,6 +1733,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@monstrs/crypto-utils", [\
+      ["npm:0.0.2", {\
+        "packageLocation": "./.yarn/cache/@monstrs-crypto-utils-npm-0.0.2-0a32aa28ce-439d057f29.zip/node_modules/@monstrs/crypto-utils/",\
+        "packageDependencies": [\
+          ["@monstrs/crypto-utils", "npm:0.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@monstrs/jest-resolver", [\
       ["npm:0.3.3", {\
         "packageLocation": "./.yarn/cache/@monstrs-jest-resolver-npm-0.3.3-462d504090-67979c5237.zip/node_modules/@monstrs/jest-resolver/",\
@@ -1760,8 +1769,10 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/mtproto-core/",\
         "packageDependencies": [\
           ["@monstrs/mtproto-core", "workspace:packages/mtproto-core"],\
+          ["@jest/globals", "npm:29.7.0"],\
           ["@monstrs/bigint-utils", "npm:0.0.2"],\
           ["@monstrs/buffer-utils", "npm:0.0.6"],\
+          ["@monstrs/crypto-utils", "npm:0.0.2"],\
           ["@monstrs/mtproto-crypto", "workspace:packages/mtproto-crypto"],\
           ["@monstrs/mtproto-extensions", "workspace:packages/mtproto-extensions"]\
         ],\

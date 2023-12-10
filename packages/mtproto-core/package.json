@@ -22,6 +22,10 @@
     "@monstrs/mtproto-crypto": "workspace:0.0.5",
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
   },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@monstrs/crypto-utils": "^0.0.2"
+  },
   "publishConfig": {
     "exports": {
       "./package.json": "./package.json",
