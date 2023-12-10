@@ -1186,6 +1186,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monstrs/crypto-utils@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@monstrs/crypto-utils@npm:0.0.2"
+  checksum: 439d057f291797a411164c20f2116f5c231fb0658f0d21cf62dcb5d3a9dfb1a47451ca4d5e2e00f896128c8fdb37e822ebc6a1069f29cf1cd067fea6f41ed85a
+  languageName: node
+  linkType: hard
+
 "@monstrs/jest-resolver@npm:0.3.3":
   version: 0.3.3
   resolution: "@monstrs/jest-resolver@npm:0.3.3"
@@ -1209,8 +1216,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-core@workspace:packages/mtproto-core"
   dependencies:
+    "@jest/globals": "npm:^29.7.0"
     "@monstrs/bigint-utils": "npm:^0.0.2"
     "@monstrs/buffer-utils": "npm:^0.0.6"
+    "@monstrs/crypto-utils": "npm:^0.0.2"
     "@monstrs/mtproto-crypto": "workspace:0.0.5"
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
   languageName: unknown
