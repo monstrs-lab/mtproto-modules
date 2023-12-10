@@ -48,7 +48,7 @@ export class MTProtoEncryptedRawMessage {
     const keyPair = MTProtoKeyPair.fromAuthAndMessageKey(
       this.#authKey,
       messageKey,
-      MTProtoKeyPairType.SERVER
+      MTProtoKeyPairType.CLIENT
     )
 
     const authKeyId = Buffer.alloc(8)
