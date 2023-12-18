@@ -1,3 +1,5 @@
+import { Buffer }             from 'node:buffer'
+
 import { fromBigIntToBuffer } from '@monstrs/buffer-utils'
 
 export class MTProtoAbridgedTransport {
