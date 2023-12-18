@@ -1,5 +1,6 @@
 import type { MTProtoCodec }        from '@monstrs/mtproto-core'
 
+import { Buffer }                   from 'node:buffer'
 import { createCipheriv }           from 'node:crypto'
 import { createDecipheriv }         from 'node:crypto'
 import { randomBytes }              from 'node:crypto'
@@ -27,9 +28,9 @@ export class MTProtoObfuscatedCodec implements MTProtoCodec {
 
     const obfuscaded = createDecipheriv('AES-256-CTR', this.key, this.iv).update(header)
 
-    const protocolType = obfuscaded.subarray(56, obfuscaded.length).readUint32BE()
+    const protocolType = obfuscaded.subarray(56, obfuscaded.length).readUInt32BE()
 
-    if (protocolType !== transport.OBFUSCATED_TAG.readUint32BE()) {
+    if (protocolType !== transport.OBFUSCATED_TAG.readUInt32BE()) {
       throw new Error('Invalid protocol')
     }
   }
