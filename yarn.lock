@@ -1208,11 +1208,11 @@ __metadata:
   dependencies:
     "@jest/globals": "npm:^29.7.0"
     "@monstrs/buffer-utils": "npm:^0.0.6"
-    "@monstrs/mtproto-core": "workspace:0.0.25"
+    "@monstrs/mtproto-core": "workspace:0.0.26"
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-core@workspace:0.0.25, @monstrs/mtproto-core@workspace:packages/mtproto-core":
+"@monstrs/mtproto-core@workspace:0.0.26, @monstrs/mtproto-core@workspace:packages/mtproto-core":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-core@workspace:packages/mtproto-core"
   dependencies:
