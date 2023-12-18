@@ -52,7 +52,7 @@ export class MTProtoUnencryptedRawMessage {
     const messageId = Buffer.alloc(8)
     const messageLength = Buffer.alloc(4)
 
-    authKeyId.writeBigUint64LE(BigInt(0))
+    authKeyId.writeBigUInt64LE(BigInt(0))
     messageId.writeBigInt64BE(this.#messageId.value)
     messageLength.writeUInt32LE(this.#messageLength)
 
