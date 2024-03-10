@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mtproto tl to typescript tl index generator check generate index file 1`] = `
+"export * from "./test.js";
+"
+`;

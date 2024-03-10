@@ -16,9 +16,7 @@ export class TLToTypeScript {
   }
 
   async execute(schema: TLSchema): Promise<void> {
-    const parsed = new TLJsonParser().parse(schema)
-
-    await this.schemaGenerator.generate(parsed)
+    await this.schemaGenerator.generate(new TLJsonParser().parse(schema))
   }
 
   async write(): Promise<void> {

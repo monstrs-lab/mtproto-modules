@@ -1,6 +1,6 @@
 {
-  "name": "@monstrs/mtproto-tl-to-typescript",
-  "version": "0.0.7",
+  "name": "@monstrs/mtproto-tl-primitives",
+  "version": "0.0.1",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -8,11 +8,7 @@
     ".": "./src/index.ts"
   },
   "main": "src/index.ts",
-  "bin": {
-    "tl-to-typescript": "./bin/tl-to-typescript.js"
-  },
   "files": [
-    "bin",
     "dist"
   ],
   "scripts": {
@@ -21,17 +17,7 @@
     "postpack": "rm -rf dist"
   },
   "dependencies": {
-    "@monstrs/mtproto-tl-core": "workspace:0.0.8",
-    "@monstrs/mtproto-tl-json-parser": "workspace:0.0.2",
-    "@monstrs/mtproto-tl-types": "workspace:0.0.2",
-    "camelcase": "^8.0.0",
-    "commander": "^11.1.0",
-    "decamelize": "^6.0.0",
-    "ts-morph": "^20.0.0"
-  },
-  "devDependencies": {
-    "@jest/globals": "^29.7.0",
-    "@monstrs/mtproto-tl-primitives": "workspace:0.0.1"
+    "@tgsnake/core": "^1.10.9"
   },
   "publishConfig": {
     "exports": {
