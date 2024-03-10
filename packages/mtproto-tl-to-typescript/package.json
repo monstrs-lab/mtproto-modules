@@ -29,6 +29,10 @@
     "decamelize": "^6.0.0",
     "ts-morph": "^20.0.0"
   },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@monstrs/mtproto-tl-primitives": "workspace:0.0.1"
+  },
   "publishConfig": {
     "exports": {
       "./package.json": "./package.json",
