@@ -5,20 +5,21 @@ import { join }                    from 'node:path'
 
 import { VariableDeclarationKind } from 'ts-morph'
 
-export class TLSchemaRegistryGenerator {
-  constructor(
-    private readonly project: Project,
-    private readonly outDir: string
-  ) {}
+export class TLRegistryGenerator {
+  constructor(private readonly project: Project) {}
 
   generate(): void {
-    const sourceFile = this.project.createSourceFile(join(this.outDir, 'schema.registry.ts'), '', {
-      overwrite: true,
-    })
+    const sourceFile = this.project.createSourceFile(
+      join(this.project.compilerOptions.get().outDir!, 'registry.ts'),
+      '',
+      {
+        overwrite: true,
+      }
+    )
 
     sourceFile.addImportDeclaration({
       moduleSpecifier: '@monstrs/mtproto-tl-core',
-      namedImports: ['TLObject'],
+      namedImports: ['TLRegistry'],
     })
 
     const classMap: Map<string, string> = new Map()
@@ -27,7 +28,7 @@ export class TLSchemaRegistryGenerator {
       sf.getClasses().forEach((clazz) => {
         const idConstructor = clazz
           .getProperties()
-          .find((property) => property.getName() === 'CONSTRUCTOR_ID')
+          .find((property) => property.getName() === 'constructorId')
 
         if (idConstructor) {
           classMap.set(idConstructor.getInitializer()!.getText()!, clazz.getName()!)
@@ -45,10 +46,10 @@ export class TLSchemaRegistryGenerator {
       declarationKind: VariableDeclarationKind.Const,
       declarations: [
         {
-          name: 'SchemaRegistry',
-          initializer: `new Map<number, typeof TLObject<any>>([${Array.from(classMap.keys())
+          name: 'registry',
+          initializer: `new TLRegistry(new Map([${Array.from(classMap.keys())
             .map((key) => `[${key}, ${classMap.get(key)}]`)
-            .join(',')}])`,
+            .join(',')}]))`,
         },
       ],
     })

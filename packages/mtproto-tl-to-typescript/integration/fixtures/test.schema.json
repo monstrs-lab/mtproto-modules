@@ -1,0 +1,16 @@
+{
+  "constructors": [
+    {
+      "id": 85337187,
+      "predicate": "resPQ",
+      "params": [
+        { "name": "nonce", "type": "int128" },
+        { "name": "server_nonce", "type": "int128" },
+        { "name": "pq", "type": "bytes" },
+        { "name": "server_public_key_fingerprints", "type": "Vector<long>" }
+      ],
+      "type": "ResPQ"
+    }
+  ],
+  "methods": []
+}

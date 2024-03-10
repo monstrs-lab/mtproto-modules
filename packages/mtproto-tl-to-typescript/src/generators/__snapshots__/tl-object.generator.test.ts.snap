@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mtproto tl to typescript tl object generator check generate core types 1`] = `
+"import { TLObject } from "@monstrs/mtproto-tl-core";
+import * as Primitive from "@monstrs/mtproto-tl-primitives";
+
+export interface TestParams {
+    int: number;
+    int128: bigint;
+    int256: bigint;
+    long: bigint;
+    double: number;
+    bytes: Buffer;
+    string: string;
+    bool: boolean;
+}
+
+export class Test extends TLObject {
+    override constructorId: number = 0x05162463;
+
+    int!: number;
+
+    int128!: bigint;
+
+    int256!: bigint;
+
+    long!: bigint;
+
+    double!: number;
+
+    bytes!: Buffer;
+
+    string!: string;
+
+    bool!: boolean;
+
+    constructor(params: TestParams) {
+        super(params)
+        this.int = params.int
+        this.int128 = params.int128
+        this.int256 = params.int256
+        this.long = params.long
+        this.double = params.double
+        this.bytes = params.bytes
+        this.string = params.string
+        this.bool = params.bool
+    }
+
+    static override async read(b: Primitive.BytesIO): Promise<Test> {
+        const int = await Primitive.Int.read(b)
+        const int128 = await Primitive.Int128.read(b)
+        const int256 = await Primitive.Int256.read(b)
+        const long = await Primitive.Long.read(b)
+        const double = await Primitive.Double.read(b)
+        const bytes = await Primitive.Bytes.read(b)
+        const string = await Primitive.String.read(b)
+        const bool = await Primitive.Bool.read(b)
+        return new Test({ int, int128, int256, long, double, bytes, string, bool })
+    }
+
+    write(): Buffer {
+        const b: Primitive.BytesIO = new Primitive.BytesIO()
+        b.write(Primitive.Int.write(this.constructorId, false))
+        if (this.int !== undefined) {
+            b.write(Primitive.Int.write(this.int))
+        }
+        if (this.int128 !== undefined) {
+            b.write(Primitive.Int128.write(this.int128))
+        }
+        if (this.int256 !== undefined) {
+            b.write(Primitive.Int256.write(this.int256))
+        }
+        if (this.long !== undefined) {
+            b.write(Primitive.Long.write(this.long))
+        }
+        if (this.double !== undefined) {
+            b.write(Primitive.Double.write(this.double))
+        }
+        if (this.bytes !== undefined) {
+            b.write(Primitive.Bytes.write(this.bytes))
+        }
+        if (this.string !== undefined) {
+            b.write(Primitive.String.write(this.string))
+        }
+        if (this.bool !== undefined) {
+            b.write(Primitive.Bool.write(this.bool))
+        }
+        return b.buffer
+    }
+}
+"
+`;
+
+exports[`mtproto tl to typescript tl object generator check generate custom types 1`] = `
+"import { TLObject } from "@monstrs/mtproto-tl-core";
+import * as Primitive from "@monstrs/mtproto-tl-primitives";
+import { Custom } from "./custom.js";
+import { registry } from "./registry.js";
+
+export interface TestParams {
+    param: Custom;
+}
+
+export class Test extends TLObject {
+    override constructorId: number = 0x05162463;
+
+    param!: Custom;
+
+    constructor(params: TestParams) {
+        super(params)
+        this.param = params.param
+    }
+
+    static override async read(b: Primitive.BytesIO): Promise<Test> {
+        const param = await registry.read(b)
+        return new Test({ param })
+    }
+
+    write(): Buffer {
+        const b: Primitive.BytesIO = new Primitive.BytesIO()
+        b.write(Primitive.Int.write(this.constructorId, false))
+        if (this.param !== undefined) {
+            b.write(this.param.write())
+        }
+        return b.buffer
+    }
+}
+"
+`;
+
+exports[`mtproto tl to typescript tl object generator check generate flags types 1`] = `
+"import { TLObject } from "@monstrs/mtproto-tl-core";
+import * as Primitive from "@monstrs/mtproto-tl-primitives";
+
+export interface TestParams {
+    param?: boolean;
+}
+
+export class Test extends TLObject {
+    override constructorId: number = 0x05162463;
+
+    param?: boolean;
+
+    constructor(params: TestParams) {
+        super(params)
+        this.param = params.param
+    }
+
+    static override async read(b: Primitive.BytesIO): Promise<Test> {
+        let flags = await Primitive.Int.read(b)
+        const param = flags & (1 << 0) ? true : false
+        return new Test({ param })
+    }
+
+    write(): Buffer {
+        const b: Primitive.BytesIO = new Primitive.BytesIO()
+        b.write(Primitive.Int.write(this.constructorId, false))
+        let flags = 0
+        flags |= this.param ? 1 << 0 : 0
+        b.write(Primitive.Int.write(flags))
+        return b.buffer
+    }
+}
+"
+`;
+
+exports[`mtproto tl to typescript tl object generator check generate vector types 1`] = `
+"import { TLObject } from "@monstrs/mtproto-tl-core";
+import * as Primitive from "@monstrs/mtproto-tl-primitives";
+
+export interface TestParams {
+    param: Array<number>;
+}
+
+export class Test extends TLObject {
+    override constructorId: number = 0x05162463;
+
+    param!: Array<number>;
+
+    constructor(params: TestParams) {
+        super(params)
+        this.param = params.param
+    }
+
+    static override async read(b: Primitive.BytesIO): Promise<Test> {
+        const param = await Primitive.Vector.read(b, Primitive.Int)
+        return new Test({ param })
+    }
+
+    write(): Buffer {
+        const b: Primitive.BytesIO = new Primitive.BytesIO()
+        b.write(Primitive.Int.write(this.constructorId, false))
+        if (this.param) {
+            b.write(Primitive.Vector.write(this.param, Primitive.Int))
+        }
+        return b.buffer
+    }
+}
+"
+`;

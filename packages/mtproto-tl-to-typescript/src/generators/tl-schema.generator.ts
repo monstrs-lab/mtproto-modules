@@ -1,14 +1,13 @@
-import type { TLExtendedSchema }     from '@monstrs/mtproto-tl-types'
+import type { TLExtendedSchema } from '@monstrs/mtproto-tl-types'
 
-import { Project }                   from 'ts-morph'
-import { ScriptTarget }              from 'ts-morph'
-import { ModuleKind }                from 'ts-morph'
-import { ModuleResolutionKind }      from 'ts-morph'
+import { Project }               from 'ts-morph'
+import { ScriptTarget }          from 'ts-morph'
+import { ModuleKind }            from 'ts-morph'
+import { ModuleResolutionKind }  from 'ts-morph'
 
-import { TLConstructorGenerator }    from './tl-constructor.generator.js'
-import { TLIndexGenerator }          from './tl-index.generator.js'
-import { TLMethodGenerator }         from './tl-method.generator.js'
-import { TLSchemaRegistryGenerator } from './tl-schema-registry.generator.js'
+import { TLIndexGenerator }      from './tl-index.generator.js'
+import { TLObjectGenerator }     from './tl-object.generator.js'
+import { TLRegistryGenerator }   from './tl-registry.generator.js'
 
 export interface TLSchemaGeneratorOptions {
   outDir: string
@@ -17,11 +16,9 @@ export interface TLSchemaGeneratorOptions {
 export class TLSchemaGenerator {
   private project: Project
 
-  private schemaRegistryGenerator: TLSchemaRegistryGenerator
+  private registryGenerator: TLRegistryGenerator
 
-  private constructorGenerator: TLConstructorGenerator
-
-  private methodGenerator: TLMethodGenerator
+  private objectGenerator: TLObjectGenerator
 
   private indexGenerator: TLIndexGenerator
 
@@ -35,24 +32,23 @@ export class TLSchemaGenerator {
       },
     })
 
-    this.schemaRegistryGenerator = new TLSchemaRegistryGenerator(this.project, options.outDir)
-    this.constructorGenerator = new TLConstructorGenerator(this.project, options.outDir)
-    this.methodGenerator = new TLMethodGenerator(this.project, options.outDir)
-    this.indexGenerator = new TLIndexGenerator(this.project, options.outDir)
+    this.registryGenerator = new TLRegistryGenerator(this.project)
+    this.objectGenerator = new TLObjectGenerator(this.project)
+    this.indexGenerator = new TLIndexGenerator(this.project)
   }
 
   async generate(schema: TLExtendedSchema): Promise<void> {
     schema.constructors.forEach((ctr) => {
-      this.constructorGenerator.generate(ctr)
+      this.objectGenerator.generate(ctr)
     })
 
     schema.methods.forEach((method) => {
-      this.methodGenerator.generate(method)
+      this.objectGenerator.generate(method)
     })
   }
 
   async write(): Promise<void> {
-    this.schemaRegistryGenerator.generate()
+    this.registryGenerator.generate()
     this.indexGenerator.generate()
 
     await this.project.save()
