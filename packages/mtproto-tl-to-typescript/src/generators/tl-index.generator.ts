@@ -4,17 +4,20 @@ import { basename }     from 'node:path'
 import { join }         from 'node:path'
 
 export class TLIndexGenerator {
-  constructor(
-    private readonly project: Project,
-    private readonly outDir: string
-  ) {}
+  constructor(private readonly project: Project) {}
 
   generate(): void {
-    const sourceFile = this.project.createSourceFile(join(this.outDir, 'index.ts'), '', {
-      overwrite: true,
-    })
+    const sourceFiles = this.project.getSourceFiles()
 
-    this.project.getSourceFiles().forEach((sf) => {
+    const sourceFile = this.project.createSourceFile(
+      join(this.project.compilerOptions.get().outDir!, 'index.ts'),
+      '',
+      {
+        overwrite: true,
+      }
+    )
+
+    sourceFiles.forEach((sf) => {
       sourceFile
         .addExportDeclaration({
           moduleSpecifier: `./${basename(sf.getFilePath().replace('.ts', '.js'))}`,

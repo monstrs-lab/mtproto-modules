@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mtproto tl to typescript tl registry generator check generate registry file 1`] = `
+"import { TLRegistry } from "@monstrs/mtproto-tl-core";
+import { Test } from "./test.js";
+
+export const registry = new TLRegistry(new Map([[0x00000000, Test]]));
+"
+`;
