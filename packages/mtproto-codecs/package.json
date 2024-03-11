@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-codecs",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "license": "MIT",
   "type": "module",
   "exports": {
