@@ -183,6 +183,7 @@ export class Test extends TLObject {
     }
 
     static override async read(b: Primitive.BytesIO): Promise<Test> {
+        await Primitive.Int.read(b)
         const param = await Primitive.Vector.read(b, Primitive.Int)
         return new Test({ param })
     }
