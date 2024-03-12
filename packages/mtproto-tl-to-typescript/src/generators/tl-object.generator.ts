@@ -281,10 +281,14 @@ export class TLObjectGenerator {
         } else if (param.isVector) {
           const vectorType = CORE_TYPES.has(param.type) ? `Primitive.${type}` : type
           if (param.isFlag) {
+            // TODO: move to registry
+            writer.writeLine('await Primitive.Int.read(b)')
             writer.writeLine(
               `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, ${vectorType}) : [];`
             )
           } else {
+            // TODO: move to registry
+            writer.writeLine('await Primitive.Int.read(b)')
             writer.writeLine(`const ${name} = await Primitive.Vector.read(b, ${vectorType})`)
           }
         } else if (param.type === 'true') {
