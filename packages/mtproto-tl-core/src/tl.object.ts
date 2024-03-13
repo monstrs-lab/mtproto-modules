@@ -20,6 +20,5 @@ export abstract class TLObject {
     throw new Error('Must be implemented')
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  abstract write(value: any): Buffer
+  abstract write(): Buffer
 }
