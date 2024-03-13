@@ -1323,7 +1323,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-tl-primitives@workspace:0.0.3, @monstrs/mtproto-tl-primitives@workspace:packages/mtproto-tl-primitives":
+"@monstrs/mtproto-tl-primitives@workspace:0.0.4, @monstrs/mtproto-tl-primitives@workspace:packages/mtproto-tl-primitives":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-tl-primitives@workspace:packages/mtproto-tl-primitives"
   dependencies:
@@ -1338,7 +1338,7 @@ __metadata:
     "@jest/globals": "npm:^29.7.0"
     "@monstrs/mtproto-tl-core": "workspace:0.0.9"
     "@monstrs/mtproto-tl-json-parser": "workspace:0.0.2"
-    "@monstrs/mtproto-tl-primitives": "workspace:0.0.3"
+    "@monstrs/mtproto-tl-primitives": "workspace:0.0.4"
     "@monstrs/mtproto-tl-types": "workspace:0.0.2"
     camelcase: "npm:^8.0.0"
     commander: "npm:^12.0.0"
