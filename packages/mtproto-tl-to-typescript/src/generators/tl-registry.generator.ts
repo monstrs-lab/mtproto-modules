@@ -19,6 +19,11 @@ export class TLRegistryGenerator {
 
     sourceFile.addImportDeclaration({
       moduleSpecifier: '@monstrs/mtproto-tl-core',
+      namedImports: ['TLObject'],
+    })
+
+    sourceFile.addImportDeclaration({
+      moduleSpecifier: '@monstrs/mtproto-tl-core',
       namedImports: ['TLRegistry'],
     })
 
@@ -47,7 +52,9 @@ export class TLRegistryGenerator {
       declarations: [
         {
           name: 'registry',
-          initializer: `new TLRegistry(new Map([${Array.from(classMap.keys())
+          initializer: `new TLRegistry(new Map<number, typeof TLObject>([${Array.from(
+            classMap.keys()
+          )
             .map((key) => `[${key}, ${classMap.get(key)}]`)
             .join(',')}]))`,
         },

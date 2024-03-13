@@ -11,7 +11,7 @@ export abstract class TLObject {
   // @ts-expect-error
   constructor(params: unknown) {} // eslint-disable-line @typescript-eslint/no-empty-function
 
-  static async read(data: BytesIO, registry: TLRegistry): Promise<TLObject> {
+  static async read(data: BytesIO, registry: TLRegistry): Promise<InstanceType<typeof TLObject>> {
     // @ts-expect-error
     const _data = data // eslint-disable-line
     // @ts-expect-error
