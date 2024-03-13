@@ -17,8 +17,8 @@
     "postpack": "rm -rf dist"
   },
   "dependencies": {
-    "@monstrs/bigint-utils": "^0.0.2",
-    "@monstrs/buffer-utils": "^0.0.6",
+    "@monstrs/bigint-utils": "^0.0.5",
+    "@monstrs/buffer-utils": "^0.0.9",
     "@monstrs/mtproto-crypto": "workspace:0.0.5",
     "@monstrs/mtproto-extensions": "workspace:0.0.3"
   },
