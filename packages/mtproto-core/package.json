@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-core",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -19,8 +19,8 @@
   "dependencies": {
     "@monstrs/bigint-utils": "^0.0.5",
     "@monstrs/buffer-utils": "^0.0.9",
-    "@monstrs/mtproto-crypto": "workspace:0.0.5",
-    "@monstrs/mtproto-extensions": "workspace:0.0.3"
+    "@monstrs/mtproto-crypto": "workspace:0.0.6",
+    "@monstrs/mtproto-extensions": "workspace:0.0.4"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
