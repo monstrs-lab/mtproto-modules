@@ -25,7 +25,8 @@
     "target": "es2021",
     "jsx": "react",
     "outDir": "./dist",
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "skipLibCheck": true
   },
   "include": ["project.types.d.ts", "packages/**/*"]
 }

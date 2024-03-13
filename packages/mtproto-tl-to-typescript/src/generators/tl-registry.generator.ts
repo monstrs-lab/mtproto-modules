@@ -31,7 +31,7 @@ export class TLRegistryGenerator {
           .find((property) => property.getName() === 'constructorId')
 
         if (idConstructor) {
-          classMap.set(idConstructor.getInitializer()!.getText()!, clazz.getName()!)
+          classMap.set(idConstructor.getInitializer()!.getText(), clazz.getName()!)
 
           sourceFile.addImportDeclaration({
             moduleSpecifier: `./${basename(sf.getFilePath().replace('.ts', '.js'))}`,
