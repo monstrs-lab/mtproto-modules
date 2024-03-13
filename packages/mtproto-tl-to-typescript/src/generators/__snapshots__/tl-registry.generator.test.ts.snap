@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mtproto tl to typescript tl registry generator check generate registry file 1`] = `
-"import { TLObject } from "@monstrs/mtproto-tl-core";
+"import type { TLObject } from "@monstrs/mtproto-tl-core";
 import { TLRegistry } from "@monstrs/mtproto-tl-core";
 import { Test } from "./test.js";
 
