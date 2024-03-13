@@ -20,6 +20,7 @@ export class TLRegistryGenerator {
     sourceFile.addImportDeclaration({
       moduleSpecifier: '@monstrs/mtproto-tl-core',
       namedImports: ['TLObject'],
+      isTypeOnly: true,
     })
 
     sourceFile.addImportDeclaration({
