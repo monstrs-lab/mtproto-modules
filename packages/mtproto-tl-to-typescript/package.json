@@ -1,6 +1,6 @@
 {
   "name": "@monstrs/mtproto-tl-to-typescript",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@monstrs/mtproto-tl-primitives": "workspace:0.0.2"
+    "@monstrs/mtproto-tl-primitives": "workspace:0.0.3"
   },
   "publishConfig": {
     "exports": {
