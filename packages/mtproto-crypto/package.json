@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@cryptography/aes": "^0.1.1",
-    "@monstrs/buffer-utils": "^0.0.6"
+    "@monstrs/buffer-utils": "^0.0.9"
   },
   "publishConfig": {
     "exports": {

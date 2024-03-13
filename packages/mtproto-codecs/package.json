@@ -17,7 +17,7 @@
     "postpack": "rm -rf dist"
   },
   "dependencies": {
-    "@monstrs/buffer-utils": "^0.0.6",
+    "@monstrs/buffer-utils": "^0.0.9",
     "@monstrs/mtproto-core": "workspace:0.0.26"
   },
   "devDependencies": {

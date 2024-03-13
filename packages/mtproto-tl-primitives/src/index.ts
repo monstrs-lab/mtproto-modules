@@ -1,4 +1,5 @@
 export * from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
+export * from '@tgsnake/core/lib/src/crypto/Prime.js'
 
 export * from './bool.js'
 export * from './bytes.js'
