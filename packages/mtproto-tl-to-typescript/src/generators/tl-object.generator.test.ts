@@ -232,5 +232,26 @@ describe('mtproto tl to typescript', () => {
 
       expect(project.getSourceFile(join(tmpdir(), 'test.ts'))?.getFullText()).toMatchSnapshot()
     })
+
+    it('check generate empty params', async () => {
+      const project = new Project({
+        compilerOptions: {
+          outDir: tmpdir(),
+          module: ModuleKind.ES2022,
+          target: ScriptTarget.ES2022,
+          moduleResolution: ModuleResolutionKind.Bundler,
+        },
+      })
+
+      new TLObjectGenerator(project).generate({
+        id: '85337187',
+        predicate: 'test',
+        type: 'Test',
+        name: 'test',
+        params: [],
+      })
+
+      expect(project.getSourceFile(join(tmpdir(), 'test.ts'))?.getFullText()).toMatchSnapshot()
+    })
   })
 })

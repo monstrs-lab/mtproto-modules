@@ -251,12 +251,15 @@ export class TLObjectGenerator {
       isAsync: true,
       hasOverrideKeyword: true,
       name: 'read',
-      parameters: [
-        {
-          name: 'b',
-          type: 'Primitive.BytesIO',
-        },
-      ],
+      parameters:
+        schema.params.length > 0
+          ? [
+              {
+                name: 'b',
+                type: 'Primitive.BytesIO',
+              },
+            ]
+          : [],
       returnType: `Promise<${camelcase(schema.name, {
         pascalCase: true,
         preserveConsecutiveUppercase: true,
