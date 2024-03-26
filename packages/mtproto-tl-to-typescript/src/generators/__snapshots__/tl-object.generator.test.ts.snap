@@ -128,6 +128,33 @@ export class Test extends TLObject {
 "
 `;
 
+exports[`mtproto tl to typescript tl object generator check generate empty params 1`] = `
+"import { TLObject } from "@monstrs/mtproto-tl-core";
+import * as Primitive from "@monstrs/mtproto-tl-primitives";
+
+export interface TestParams {
+}
+
+export class Test extends TLObject {
+    override constructorId: number = 0x05162463;
+
+    constructor(params: TestParams) {
+        super(params)
+    }
+
+    static override async read(): Promise<Test> {
+        return new Test({  })
+    }
+
+    write(): Buffer {
+        const b: Primitive.BytesIO = new Primitive.BytesIO()
+        b.write(Primitive.Int.write(this.constructorId, false))
+        return b.buffer
+    }
+}
+"
+`;
+
 exports[`mtproto tl to typescript tl object generator check generate flags types 1`] = `
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
