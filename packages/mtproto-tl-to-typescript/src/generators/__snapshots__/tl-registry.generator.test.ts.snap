@@ -4,6 +4,6 @@ exports[`mtproto tl to typescript tl registry generator check generate registry 
 "import type { TLObject } from "@monstrs/mtproto-tl-core";
 import { TLRegistry } from "@monstrs/mtproto-tl-core";
 
-export const registry = new TLRegistry(new Map<number, typeof TLObject>([[0x00000000, async () => (await import('./test.js')).Test]]));
+export const registry = new TLRegistry(new Map<number, () => Promise<typeof TLObject>>([[0x00000000, async () => (await import('./test.js')).Test]]));
 "
 `;

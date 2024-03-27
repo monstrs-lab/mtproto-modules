@@ -51,7 +51,7 @@ export class TLRegistryGenerator {
       declarations: [
         {
           name: 'registry',
-          initializer: `new TLRegistry(new Map<number, typeof TLObject>([${Array.from(
+          initializer: `new TLRegistry(new Map<number, () => Promise<typeof TLObject>>([${Array.from(
             classMap.keys()
           )
             .map(
