@@ -1,0 +1,3 @@
+releases:
+  "@monstrs/mtproto-tl-primitives": patch
+  "@monstrs/mtproto-tl-to-typescript": patch
