@@ -406,7 +406,7 @@ export class TLObjectGenerator {
               })
             } else {
               writer.write(`if (this.${name})`).block(() => {
-                writer.write(`b.write(Primitive.Vector.write(this.${name}, ${type}))`)
+                writer.write(`b.write(Primitive.Vector.write(this.${name}))`)
               })
             }
           } else if (CORE_TYPES.has(param.type)) {
