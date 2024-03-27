@@ -189,6 +189,39 @@ describe('mtproto tl to typescript', () => {
       expect(project.getSourceFile(join(tmpdir(), 'test.ts'))?.getFullText()).toMatchSnapshot()
     })
 
+    it('check generate vector custom types', async () => {
+      const project = new Project({
+        compilerOptions: {
+          outDir: tmpdir(),
+          module: ModuleKind.ES2022,
+          target: ScriptTarget.ES2022,
+          moduleResolution: ModuleResolutionKind.Bundler,
+        },
+      })
+
+      new TLObjectGenerator(project).generate({
+        id: '85337187',
+        predicate: 'test',
+        type: 'Test',
+        name: 'test',
+        params: [
+          {
+            name: 'param',
+            type: 'Custom',
+            isVector: true,
+            isFlag: false,
+            skipConstructorId: true,
+            flagGroup: 0,
+            flagIndex: -1,
+            flagIndicator: false,
+            useVectorId: true,
+          },
+        ],
+      })
+
+      expect(project.getSourceFile(join(tmpdir(), 'test.ts'))?.getFullText()).toMatchSnapshot()
+    })
+
     it('check generate flags types', async () => {
       const project = new Project({
         compilerOptions: {

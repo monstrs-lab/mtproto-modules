@@ -283,16 +283,33 @@ export class TLObjectGenerator {
           writer.writeLine('let flags = await Primitive.Int.read(b)')
         } else if (param.isVector) {
           const vectorType = CORE_TYPES.has(param.type) ? `Primitive.${type}` : type
+
+          if (!CORE_TYPES.has(param.type)) {
+            this.importRegistry(sourceFile)
+          }
+
           if (param.isFlag) {
-            // TODO: move to registry
             writer.writeLine('await Primitive.Int.read(b)')
-            writer.writeLine(
-              `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, ${vectorType}) : [];`
-            )
+
+            if (CORE_TYPES.has(param.type)) {
+              writer.writeLine(
+                `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, ${vectorType}) : [];`
+              )
+            } else {
+              writer.writeLine(
+                `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, undefined, registry) : [];`
+              )
+            }
           } else {
-            // TODO: move to registry
             writer.writeLine('await Primitive.Int.read(b)')
-            writer.writeLine(`const ${name} = await Primitive.Vector.read(b, ${vectorType})`)
+
+            if (CORE_TYPES.has(param.type)) {
+              writer.writeLine(`const ${name} = await Primitive.Vector.read(b, ${vectorType})`)
+            } else {
+              writer.writeLine(
+                `const ${name} = await Primitive.Vector.read(b, undefined, registry)`
+              )
+            }
           }
         } else if (param.type === 'true') {
           writer.writeLine(`const ${name} = flags & (1 << ${param.flagIndex}) ? true : false`)

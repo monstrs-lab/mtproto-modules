@@ -191,6 +191,44 @@ export class Test extends TLObject {
 "
 `;
 
+exports[`mtproto tl to typescript tl object generator check generate vector custom types 1`] = `
+"import { TLObject } from "@monstrs/mtproto-tl-core";
+import * as Primitive from "@monstrs/mtproto-tl-primitives";
+import { Custom } from "./custom.js";
+import { registry } from "./registry.js";
+
+export interface TestParams {
+    param: Array<Custom>;
+}
+
+export class Test extends TLObject {
+    override constructorId: number = 0x05162463;
+
+    param!: Array<Custom>;
+
+    constructor(params: TestParams) {
+        super(params)
+        this.param = params.param
+    }
+
+    static override async read(b: Primitive.BytesIO): Promise<Test> {
+        await Primitive.Int.read(b)
+        const param = await Primitive.Vector.read(b, undefined, registry)
+        return new Test({ param })
+    }
+
+    write(): Buffer {
+        const b: Primitive.BytesIO = new Primitive.BytesIO()
+        b.write(Primitive.Int.write(this.constructorId, false))
+        if (this.param) {
+            b.write(Primitive.Vector.write(this.param, Custom))
+        }
+        return b.buffer
+    }
+}
+"
+`;
+
 exports[`mtproto tl to typescript tl object generator check generate vector types 1`] = `
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
