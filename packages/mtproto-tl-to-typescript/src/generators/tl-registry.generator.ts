@@ -28,7 +28,7 @@ export class TLRegistryGenerator {
       namedImports: ['TLRegistry'],
     })
 
-    const classMap: Map<string, string> = new Map()
+    const classMap: Map<string, { name: string; path: string }> = new Map()
 
     this.project.getSourceFiles().forEach((sf) => {
       sf.getClasses().forEach((clazz) => {
@@ -37,11 +37,9 @@ export class TLRegistryGenerator {
           .find((property) => property.getName() === 'constructorId')
 
         if (idConstructor) {
-          classMap.set(idConstructor.getInitializer()!.getText(), clazz.getName()!)
-
-          sourceFile.addImportDeclaration({
-            moduleSpecifier: `./${basename(sf.getFilePath().replace('.ts', '.js'))}`,
-            namedImports: [clazz.getName()!],
+          classMap.set(idConstructor.getInitializer()!.getText(), {
+            name: clazz.getName()!,
+            path: `./${basename(sf.getFilePath().replace('.ts', '.js'))}`,
           })
         }
       })
@@ -56,7 +54,10 @@ export class TLRegistryGenerator {
           initializer: `new TLRegistry(new Map<number, typeof TLObject>([${Array.from(
             classMap.keys()
           )
-            .map((key) => `[${key}, ${classMap.get(key)}]`)
+            .map(
+              (key) =>
+                `[${key}, async () => (await import('${classMap.get(key)!.path}')).${classMap.get(key)!.name}]`
+            )
             .join(',')}]))`,
         },
       ],

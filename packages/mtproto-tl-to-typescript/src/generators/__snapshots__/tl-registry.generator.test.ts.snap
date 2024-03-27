@@ -3,8 +3,7 @@
 exports[`mtproto tl to typescript tl registry generator check generate registry file 1`] = `
 "import type { TLObject } from "@monstrs/mtproto-tl-core";
 import { TLRegistry } from "@monstrs/mtproto-tl-core";
-import { Test } from "./test.js";
 
-export const registry = new TLRegistry(new Map<number, typeof TLObject>([[0x00000000, Test]]));
+export const registry = new TLRegistry(new Map<number, typeof TLObject>([[0x00000000, async () => (await import('./test.js')).Test]]));
 "
 `;
