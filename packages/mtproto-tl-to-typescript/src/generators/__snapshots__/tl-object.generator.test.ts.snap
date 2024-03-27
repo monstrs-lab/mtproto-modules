@@ -221,7 +221,7 @@ export class Test extends TLObject {
         const b: Primitive.BytesIO = new Primitive.BytesIO()
         b.write(Primitive.Int.write(this.constructorId, false))
         if (this.param) {
-            b.write(Primitive.Vector.write(this.param, Custom))
+            b.write(Primitive.Vector.write(this.param))
         }
         return b.buffer
     }
