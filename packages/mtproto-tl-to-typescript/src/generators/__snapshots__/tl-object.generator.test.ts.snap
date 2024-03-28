@@ -112,7 +112,7 @@ export class Test extends TLObject {
     }
 
     static override async read(b: Primitive.BytesIO): Promise<Test> {
-        const param: Custom = await registry.read(b)
+        const param = await registry.read<Custom>(b)
         return new Test({ param })
     }
 
