@@ -326,12 +326,10 @@ export class TLObjectGenerator {
 
           if (param.isFlag) {
             writer.writeLine(
-              `const ${name}${CORE_TYPES.has(param.type) ? '' : `: ${param.type} | undefined`} = flags & (1 << ${param.flagIndex}) ? await registry.read(b) : undefined`
+              `const ${name} = flags & (1 << ${param.flagIndex}) ? await registry.read<${param.type}>(b) : undefined`
             )
           } else {
-            writer.writeLine(
-              `const ${name}${CORE_TYPES.has(param.type) ? '' : `: ${param.type}`} = await registry.read(b)`
-            )
+            writer.writeLine(`const ${name} = await registry.read<${param.type}>(b)`)
           }
         }
       })
