@@ -94,7 +94,7 @@ export class Test extends TLObject {
 exports[`mtproto tl to typescript tl object generator check generate custom types 1`] = `
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
-import { Custom } from "./custom.js";
+import type { Custom } from "./custom.js";
 import { registry } from "./registry.js";
 
 export interface TestParams {
@@ -132,15 +132,8 @@ exports[`mtproto tl to typescript tl object generator check generate empty param
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
 
-export interface TestParams {
-}
-
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-
-    constructor(params: TestParams) {
-        super(params)
-    }
 
     static override async read(): Promise<Test> {
         return new Test({  })
@@ -175,15 +168,15 @@ export class Test extends TLObject {
 
     static override async read(b: Primitive.BytesIO): Promise<Test> {
         let flags = await Primitive.Int.read(b)
-        const param = flags & (1 << 0) ? true : false
+        const param = flags & (1 << 0) ? true : false // eslint-disable-line no-bitwise, no-unneeded-ternary
         return new Test({ param })
     }
 
     write(): Buffer {
         const b: Primitive.BytesIO = new Primitive.BytesIO()
         b.write(Primitive.Int.write(this.constructorId, false))
-        let flags = 0
-        flags |= this.param ? 1 << 0 : 0
+        const flags = 0
+        flags |= this.param ? 1 << 0 : 0 // eslint-disable-line no-bitwise
         b.write(Primitive.Int.write(flags))
         return b.buffer
     }
@@ -194,7 +187,7 @@ export class Test extends TLObject {
 exports[`mtproto tl to typescript tl object generator check generate vector custom types 1`] = `
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
-import { Custom } from "./custom.js";
+import type { Custom } from "./custom.js";
 import { registry } from "./registry.js";
 
 export interface TestParams {
