@@ -171,7 +171,7 @@ export class Test extends TLObject {
     }
 
     static override async read(b: Primitive.BytesIO): Promise<Test> {
-        let flags = await Primitive.Int.read(b)
+        const flags = await Primitive.Int.read(b)
         const param = flags & (1 << 0) ? true : false // eslint-disable-line no-bitwise, no-unneeded-ternary
         return new Test({ param })
     }
