@@ -4,6 +4,6 @@ exports[`mtproto tl to typescript tl types generator check generate types 1`] = 
 "import { Test1 } from "./test1.js";
 import { Test2 } from "./test2.js";
 
-export type Test = Test1 | Test2;
+export type TypeTest = Test1 | Test2;
 "
 `;

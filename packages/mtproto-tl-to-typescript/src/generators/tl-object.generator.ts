@@ -20,12 +20,12 @@ export class TLObjectGenerator {
     const moduleSpecifier = `./${decamelize(param.type.replaceAll('_', '-'), {
       separator: '-',
       preserveConsecutiveUppercase: false,
-    })}.js`
+    })}.type.js`
 
-    const paramType = camelcase(param.type, {
+    const paramType = `Type${camelcase(param.type, {
       pascalCase: true,
       preserveConsecutiveUppercase: true,
-    })
+    })}`
 
     if (
       !sourceFile
@@ -176,7 +176,7 @@ export class TLObjectGenerator {
           name: 'type',
           type: 'string',
           hasOverrideKeyword: true,
-          initializer: schema.type,
+          initializer: `'${schema.type}'`,
         },
       ],
     })
@@ -310,10 +310,10 @@ export class TLObjectGenerator {
 
           if (param.isFlag) {
             writer.writeLine(
-              `const ${name} = flags & (1 << ${param.flagIndex}) ? await registry.read<${param.type}>(b) : undefined // eslint-disable-line no-bitwise`
+              `const ${name} = flags & (1 << ${param.flagIndex}) ? await registry.read<Type${param.type}>(b) : undefined // eslint-disable-line no-bitwise`
             )
           } else {
-            writer.writeLine(`const ${name} = await registry.read<${param.type}>(b)`)
+            writer.writeLine(`const ${name} = await registry.read<Type${param.type}>(b)`)
           }
         }
       })
