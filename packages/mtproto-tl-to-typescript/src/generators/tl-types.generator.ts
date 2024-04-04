@@ -46,6 +46,7 @@ export class TLTypesGenerator {
         sourceFile.addImportDeclaration({
           moduleSpecifier: param.path,
           namedImports: [param.name],
+          isTypeOnly: true,
         })
       })
 
