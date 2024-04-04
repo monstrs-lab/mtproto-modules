@@ -26,7 +26,7 @@ describe('mtproto tl to typescript', () => {
       new TLObjectGenerator(project).generate({
         id: '85337187',
         predicate: 'test',
-        type: 'Test',
+        type: 'TTest',
         name: 'test',
         params: [
           {
@@ -136,7 +136,7 @@ describe('mtproto tl to typescript', () => {
       new TLObjectGenerator(project).generate({
         id: '85337187',
         predicate: 'test',
-        type: 'Test',
+        type: 'TTest',
         name: 'test',
         params: [
           {
@@ -169,7 +169,7 @@ describe('mtproto tl to typescript', () => {
       new TLObjectGenerator(project).generate({
         id: '85337187',
         predicate: 'test',
-        type: 'Test',
+        type: 'TTest',
         name: 'test',
         params: [
           {
@@ -202,7 +202,7 @@ describe('mtproto tl to typescript', () => {
       new TLObjectGenerator(project).generate({
         id: '85337187',
         predicate: 'test',
-        type: 'Test',
+        type: 'TTest',
         name: 'test',
         params: [
           {
@@ -235,7 +235,7 @@ describe('mtproto tl to typescript', () => {
       new TLObjectGenerator(project).generate({
         id: '85337187',
         predicate: 'test',
-        type: 'Test',
+        type: 'TTest',
         name: 'test',
         params: [
           {
@@ -279,7 +279,7 @@ describe('mtproto tl to typescript', () => {
       new TLObjectGenerator(project).generate({
         id: '85337187',
         predicate: 'test',
-        type: 'Test',
+        type: 'TTest',
         name: 'test',
         params: [],
       })

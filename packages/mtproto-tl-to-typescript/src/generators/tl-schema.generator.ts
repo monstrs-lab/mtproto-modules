@@ -8,6 +8,7 @@ import { ModuleResolutionKind }  from 'ts-morph'
 import { TLIndexGenerator }      from './tl-index.generator.js'
 import { TLObjectGenerator }     from './tl-object.generator.js'
 import { TLRegistryGenerator }   from './tl-registry.generator.js'
+import { TLTypesGenerator }      from './tl-types.generator.js'
 
 export interface TLSchemaGeneratorOptions {
   outDir: string
@@ -22,6 +23,8 @@ export class TLSchemaGenerator {
 
   private indexGenerator: TLIndexGenerator
 
+  private typesGenerator: TLTypesGenerator
+
   constructor(options: TLSchemaGeneratorOptions) {
     this.project = new Project({
       compilerOptions: {
@@ -34,6 +37,7 @@ export class TLSchemaGenerator {
 
     this.registryGenerator = new TLRegistryGenerator(this.project)
     this.objectGenerator = new TLObjectGenerator(this.project)
+    this.typesGenerator = new TLTypesGenerator(this.project)
     this.indexGenerator = new TLIndexGenerator(this.project)
   }
 
@@ -49,6 +53,7 @@ export class TLSchemaGenerator {
 
   async write(): Promise<void> {
     this.registryGenerator.generate()
+    this.typesGenerator.generate()
     this.indexGenerator.generate()
 
     await this.project.save()
