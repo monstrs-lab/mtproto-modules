@@ -176,7 +176,10 @@ export class TLObjectGenerator {
           name: 'type',
           type: 'string',
           hasOverrideKeyword: true,
-          initializer: `'${schema.type}'`,
+          initializer: `'${camelcase(schema.type, {
+            pascalCase: true,
+            preserveConsecutiveUppercase: true,
+          })}'`,
         },
       ],
     })
@@ -259,10 +262,11 @@ export class TLObjectGenerator {
 
         const type = camelcase(param.type, {
           pascalCase: true,
+          preserveConsecutiveUppercase: true,
         })
 
         if (param.name === 'flags') {
-          writer.writeLine('let flags = await Primitive.Int.read(b)')
+          writer.writeLine('const flags = await Primitive.Int.read(b)')
         } else if (param.isVector) {
           const vectorType = isCoreType(param.type) ? `Primitive.${type}` : type
 
