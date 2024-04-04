@@ -179,7 +179,7 @@ export class Test extends TLObject {
     write(): Buffer {
         const b: Primitive.BytesIO = new Primitive.BytesIO()
         b.write(Primitive.Int.write(this.constructorId, false))
-        const flags = 0
+        let flags = 0
         flags |= this.param ? 1 << 0 : 0 // eslint-disable-line no-bitwise
         b.write(Primitive.Int.write(flags))
         return b.buffer
