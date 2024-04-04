@@ -346,7 +346,7 @@ export class TLObjectGenerator {
       writer.writeLine('b.write(Primitive.Int.write(this.constructorId, false))')
 
       if (schema.params.some((param) => param.isFlag)) {
-        writer.writeLine('const flags = 0')
+        writer.writeLine('let flags = 0')
 
         schema.params.forEach((param) => {
           const name = this.getParamName(
