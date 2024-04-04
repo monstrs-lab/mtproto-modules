@@ -5,8 +5,9 @@ import type { BytesIO }    from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
 import type { TLRegistry } from './tl.registry.js'
 
 export abstract class TLObject {
-  // @ts-expect-error
-  constructorId: number
+  constructorId!: number
+
+  type!: string
 
   // @ts-expect-error
   constructor(params: unknown) {} // eslint-disable-line @typescript-eslint/no-empty-function
