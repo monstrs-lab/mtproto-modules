@@ -49,7 +49,7 @@ describe('mtproto tl to typescript', () => {
 
       new TLTypesGenerator(project).generate()
 
-      expect(project.getSourceFile(join(tmpdir(), 'test.ts'))?.getFullText()).toMatchSnapshot()
+      expect(project.getSourceFile(join(tmpdir(), 'test.type.ts'))?.getFullText()).toMatchSnapshot()
     })
   })
 })

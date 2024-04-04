@@ -17,7 +17,7 @@ export interface TestParams {
 
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-    override type: string = TTest;
+    override type: string = 'TTest';
 
     int!: number;
 
@@ -95,18 +95,18 @@ export class Test extends TLObject {
 exports[`mtproto tl to typescript tl object generator check generate custom types 1`] = `
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
-import type { Custom } from "./custom.js";
+import type { TypeCustom } from "./custom.type.js";
 import { registry } from "./registry.js";
 
 export interface TestParams {
-    param: Custom;
+    param: TypeCustom;
 }
 
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-    override type: string = TTest;
+    override type: string = 'TTest';
 
-    param!: Custom;
+    param!: TypeCustom;
 
     constructor(params: TestParams) {
         super(params)
@@ -114,7 +114,7 @@ export class Test extends TLObject {
     }
 
     static override async read(b: Primitive.BytesIO): Promise<Test> {
-        const param = await registry.read<Custom>(b)
+        const param = await registry.read<TypeCustom>(b)
         return new Test({ param })
     }
 
@@ -136,7 +136,7 @@ import * as Primitive from "@monstrs/mtproto-tl-primitives";
 
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-    override type: string = TTest;
+    override type: string = 'TTest';
 
     static override async read(): Promise<Test> {
         return new Test({  })
@@ -161,7 +161,7 @@ export interface TestParams {
 
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-    override type: string = TTest;
+    override type: string = 'TTest';
 
     param?: boolean;
 
@@ -191,18 +191,18 @@ export class Test extends TLObject {
 exports[`mtproto tl to typescript tl object generator check generate vector custom types 1`] = `
 "import { TLObject } from "@monstrs/mtproto-tl-core";
 import * as Primitive from "@monstrs/mtproto-tl-primitives";
-import type { Custom } from "./custom.js";
+import type { TypeCustom } from "./custom.type.js";
 import { registry } from "./registry.js";
 
 export interface TestParams {
-    param: Array<Custom>;
+    param: Array<TypeCustom>;
 }
 
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-    override type: string = TTest;
+    override type: string = 'TTest';
 
-    param!: Array<Custom>;
+    param!: Array<TypeCustom>;
 
     constructor(params: TestParams) {
         super(params)
@@ -237,7 +237,7 @@ export interface TestParams {
 
 export class Test extends TLObject {
     override constructorId: number = 0x05162463;
-    override type: string = TTest;
+    override type: string = 'TTest';
 
     param!: Array<number>;
 
