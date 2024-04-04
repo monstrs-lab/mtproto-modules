@@ -1,6 +1,7 @@
 import type { TLExtendedSchemaConstructor } from '@monstrs/mtproto-tl-types'
 import type { TLExtendedSchemaMethod }      from '@monstrs/mtproto-tl-types'
 import type { TLExtendedSchemaParam }       from '@monstrs/mtproto-tl-types'
+import type { InterfaceDeclaration }        from 'ts-morph'
 import type { Project }                     from 'ts-morph'
 import type { SourceFile }                  from 'ts-morph'
 
@@ -9,47 +10,11 @@ import { join }                             from 'node:path'
 import camelcase                            from 'camelcase'
 import decamelize                           from 'decamelize'
 
-const CORE_TYPES = new Set([
-  'int',
-  'long',
-  'int128',
-  'int256',
-  'double',
-  'bytes',
-  'string',
-  'Bool',
-  'true',
-])
+import { isCoreType }                       from './tl-generator.utils.js'
+import { resolveNativeTypeForParam }        from './tl-generator.utils.js'
 
 export class TLObjectGenerator {
   constructor(private readonly project: Project) {}
-
-  resolvePlainTypeForParam(param: TLExtendedSchemaParam): string | undefined {
-    switch (param.type) {
-      case 'int':
-        return 'number'
-      case 'long':
-        return 'bigint'
-      case 'int128':
-        return 'bigint'
-      case 'int256':
-        return 'bigint'
-      case 'double':
-        return 'number'
-      case 'string':
-        return 'string'
-      case 'Bool':
-        return 'boolean'
-      case 'true':
-        return 'boolean'
-      case 'bytes':
-        return 'Buffer'
-      case 'date':
-        return 'Date'
-      default:
-        return undefined
-    }
-  }
 
   resolveCustomTypeForParam(sourceFile: SourceFile, param: TLExtendedSchemaParam): string {
     const moduleSpecifier = `./${decamelize(param.type.replaceAll('_', '-'), {
@@ -76,6 +41,7 @@ export class TLObjectGenerator {
       sourceFile.addImportDeclaration({
         moduleSpecifier,
         namedImports: [paramType],
+        isTypeOnly: true,
       })
     }
 
@@ -83,7 +49,7 @@ export class TLObjectGenerator {
   }
 
   resolveTypeForParam(sourceFile: SourceFile, param: TLExtendedSchemaParam): string {
-    const paramType = this.resolvePlainTypeForParam(param)
+    const paramType = resolveNativeTypeForParam(param)
 
     if (paramType) {
       return paramType
@@ -165,13 +131,32 @@ export class TLObjectGenerator {
       namespaceImport: 'Primitive',
     })
 
-    const paramsInterfaceDeclaration = sourceFile.addInterface({
-      isExported: true,
-      name: `${camelcase(schema.name, {
-        pascalCase: true,
-        preserveConsecutiveUppercase: true,
-      })}Params`,
-    })
+    let paramsInterfaceDeclaration: InterfaceDeclaration | undefined
+
+    if (Object.keys(schema.params).length > 0) {
+      paramsInterfaceDeclaration = sourceFile.addInterface({
+        isExported: true,
+        name: `${camelcase(schema.name, {
+          pascalCase: true,
+          preserveConsecutiveUppercase: true,
+        })}Params`,
+      })
+
+      schema.params.forEach((param) => {
+        if (param.name !== 'flags') {
+          paramsInterfaceDeclaration!.addProperty({
+            hasQuestionToken: param.isFlag,
+            type: this.getTypeForParam(sourceFile, param),
+            name: this.getParamName(
+              camelcase(param.name, {
+                pascalCase: false,
+                preserveConsecutiveUppercase: true,
+              })
+            ),
+          })
+        }
+      })
+    }
 
     const classDeclaration = sourceFile.addClass({
       isExported: true,
@@ -206,45 +191,36 @@ export class TLObjectGenerator {
           ),
           leadingTrivia: (writer) => writer.newLine(),
         })
-
-        paramsInterfaceDeclaration.addProperty({
-          hasQuestionToken: param.isFlag,
-          type: this.getTypeForParam(sourceFile, param),
-          name: this.getParamName(
-            camelcase(param.name, {
-              pascalCase: false,
-              preserveConsecutiveUppercase: true,
-            })
-          ),
-        })
       }
     })
 
-    const ctor = classDeclaration.addConstructor({
-      parameters: [
-        {
-          name: 'params',
-          type: paramsInterfaceDeclaration.getName(),
-        },
-      ],
-    })
-
-    ctor.setBodyText((writer) => {
-      writer.writeLine('super(params)')
-
-      schema.params.forEach((param) => {
-        if (param.name !== 'flags') {
-          const name = this.getParamName(
-            camelcase(param.name, {
-              pascalCase: false,
-              preserveConsecutiveUppercase: true,
-            })
-          )
-
-          writer.writeLine(`this.${name} = params.${name}`)
-        }
+    if (paramsInterfaceDeclaration) {
+      const ctor = classDeclaration.addConstructor({
+        parameters: [
+          {
+            name: 'params',
+            type: paramsInterfaceDeclaration.getName(),
+          },
+        ],
       })
-    })
+
+      ctor.setBodyText((writer) => {
+        writer.writeLine('super(params)')
+
+        schema.params.forEach((param) => {
+          if (param.name !== 'flags') {
+            const name = this.getParamName(
+              camelcase(param.name, {
+                pascalCase: false,
+                preserveConsecutiveUppercase: true,
+              })
+            )
+
+            writer.writeLine(`this.${name} = params.${name}`)
+          }
+        })
+      })
+    }
 
     const readMethodDeclaration = classDeclaration.addMethod({
       isStatic: true,
@@ -282,28 +258,28 @@ export class TLObjectGenerator {
         if (param.name === 'flags') {
           writer.writeLine('let flags = await Primitive.Int.read(b)')
         } else if (param.isVector) {
-          const vectorType = CORE_TYPES.has(param.type) ? `Primitive.${type}` : type
+          const vectorType = isCoreType(param.type) ? `Primitive.${type}` : type
 
-          if (!CORE_TYPES.has(param.type)) {
+          if (!isCoreType(param.type)) {
             this.importRegistry(sourceFile)
           }
 
           if (param.isFlag) {
             writer.writeLine('await Primitive.Int.read(b)')
 
-            if (CORE_TYPES.has(param.type)) {
+            if (isCoreType(param.type)) {
               writer.writeLine(
-                `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, ${vectorType}) : [];`
+                `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, ${vectorType}) : [] // eslint-disable-line no-bitwise`
               )
             } else {
               writer.writeLine(
-                `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, undefined, registry) : [];`
+                `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.Vector.read(b, undefined, registry) : [] // eslint-disable-line no-bitwise`
               )
             }
           } else {
             writer.writeLine('await Primitive.Int.read(b)')
 
-            if (CORE_TYPES.has(param.type)) {
+            if (isCoreType(param.type)) {
               writer.writeLine(`const ${name} = await Primitive.Vector.read(b, ${vectorType})`)
             } else {
               writer.writeLine(
@@ -312,11 +288,13 @@ export class TLObjectGenerator {
             }
           }
         } else if (param.type === 'true') {
-          writer.writeLine(`const ${name} = flags & (1 << ${param.flagIndex}) ? true : false`)
-        } else if (CORE_TYPES.has(param.type)) {
+          writer.writeLine(
+            `const ${name} = flags & (1 << ${param.flagIndex}) ? true : false // eslint-disable-line no-bitwise, no-unneeded-ternary`
+          )
+        } else if (isCoreType(param.type)) {
           if (param.isFlag) {
             writer.writeLine(
-              `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.${type}.read(b) : undefined`
+              `const ${name} = flags & (1 << ${param.flagIndex}) ? await Primitive.${type}.read(b) : undefined // eslint-disable-line no-bitwise`
             )
           } else {
             writer.writeLine(`const ${name} = await Primitive.${type}.read(b)`)
@@ -326,7 +304,7 @@ export class TLObjectGenerator {
 
           if (param.isFlag) {
             writer.writeLine(
-              `const ${name} = flags & (1 << ${param.flagIndex}) ? await registry.read<${param.type}>(b) : undefined`
+              `const ${name} = flags & (1 << ${param.flagIndex}) ? await registry.read<${param.type}>(b) : undefined // eslint-disable-line no-bitwise`
             )
           } else {
             writer.writeLine(`const ${name} = await registry.read<${param.type}>(b)`)
@@ -362,7 +340,7 @@ export class TLObjectGenerator {
       writer.writeLine('b.write(Primitive.Int.write(this.constructorId, false))')
 
       if (schema.params.some((param) => param.isFlag)) {
-        writer.writeLine('let flags = 0')
+        writer.writeLine('const flags = 0')
 
         schema.params.forEach((param) => {
           const name = this.getParamName(
@@ -374,13 +352,21 @@ export class TLObjectGenerator {
 
           if (param.isFlag) {
             if (param.isVector) {
-              writer.writeLine(`flags |= this.${name} ? 1 << ${param.flagIndex} : 0`)
+              writer.writeLine(
+                `flags |= this.${name} ? 1 << ${param.flagIndex} : 0 // eslint-disable-line no-bitwise`
+              )
             } else if (param.type === 'true') {
-              writer.writeLine(`flags |= this.${name} ? 1 << ${param.flagIndex} : 0`)
-            } else if (CORE_TYPES.has(param.type)) {
-              writer.writeLine(`flags |= this.${name} !== undefined ? 1 << ${param.flagIndex} : 0`)
+              writer.writeLine(
+                `flags |= this.${name} ? 1 << ${param.flagIndex} : 0 // eslint-disable-line no-bitwise`
+              )
+            } else if (isCoreType(param.type)) {
+              writer.writeLine(
+                `flags |= this.${name} !== undefined ? 1 << ${param.flagIndex} : 0 // eslint-disable-line no-bitwise`
+              )
             } else {
-              writer.writeLine(`flags |= this.${name} !== undefined ? 1 << ${param.flagIndex} : 0`)
+              writer.writeLine(
+                `flags |= this.${name} !== undefined ? 1 << ${param.flagIndex} : 0 // eslint-disable-line no-bitwise`
+              )
             }
           }
         })
@@ -402,7 +388,7 @@ export class TLObjectGenerator {
 
         if (param.type !== 'true' && param.name !== 'flags') {
           if (param.isVector) {
-            if (CORE_TYPES.has(param.type)) {
+            if (isCoreType(param.type)) {
               writer.write(`if (this.${name})`).block(() => {
                 writer.write(`b.write(Primitive.Vector.write(this.${name}, Primitive.${type}))`)
               })
@@ -411,7 +397,7 @@ export class TLObjectGenerator {
                 writer.write(`b.write(Primitive.Vector.write(this.${name}))`)
               })
             }
-          } else if (CORE_TYPES.has(param.type)) {
+          } else if (isCoreType(param.type)) {
             writer.write(`if (this.${name} !== undefined)`).block(() => {
               writer.write(`b.write(Primitive.${type}.write(this.${name}))`)
             })

@@ -11,7 +11,7 @@ export class TLRegistryGenerator {
   generate(): void {
     const sourceFile = this.project.createSourceFile(
       join(this.project.compilerOptions.get().outDir!, 'registry.ts'),
-      '',
+      '/* eslint-disable @typescript-eslint/explicit-function-return-type */',
       {
         overwrite: true,
       }
