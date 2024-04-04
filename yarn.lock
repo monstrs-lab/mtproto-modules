@@ -1307,7 +1307,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-tl-core@workspace:0.0.12, @monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core":
+"@monstrs/mtproto-tl-core@workspace:0.0.13, @monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core"
   dependencies:
@@ -1336,7 +1336,7 @@ __metadata:
   resolution: "@monstrs/mtproto-tl-to-typescript@workspace:packages/mtproto-tl-to-typescript"
   dependencies:
     "@jest/globals": "npm:^29.7.0"
-    "@monstrs/mtproto-tl-core": "workspace:0.0.12"
+    "@monstrs/mtproto-tl-core": "workspace:0.0.13"
     "@monstrs/mtproto-tl-json-parser": "workspace:0.0.2"
     "@monstrs/mtproto-tl-primitives": "workspace:0.0.6"
     "@monstrs/mtproto-tl-types": "workspace:0.0.2"
