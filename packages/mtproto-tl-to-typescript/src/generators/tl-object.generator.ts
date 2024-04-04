@@ -379,6 +379,8 @@ export class TLObjectGenerator {
               writer.writeLine(`flags |= this.${name} ? 1 << ${param.flagIndex} : 0`)
             } else if (CORE_TYPES.has(param.type)) {
               writer.writeLine(`flags |= this.${name} !== undefined ? 1 << ${param.flagIndex} : 0`)
+            } else {
+              writer.writeLine(`flags |= this.${name} !== undefined ? 1 << ${param.flagIndex} : 0`)
             }
           }
         })
