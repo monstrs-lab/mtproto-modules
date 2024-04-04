@@ -172,6 +172,12 @@ export class TLObjectGenerator {
           hasOverrideKeyword: true,
           initializer: `0x${Number(schema.id).toString(16).padStart(8, '0')}`,
         },
+        {
+          name: 'type',
+          type: 'string',
+          hasOverrideKeyword: true,
+          initializer: schema.type,
+        },
       ],
     })
 
