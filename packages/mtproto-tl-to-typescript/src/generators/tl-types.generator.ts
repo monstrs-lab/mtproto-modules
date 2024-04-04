@@ -16,7 +16,7 @@ export class TLTypesGenerator {
         const t = clazz.getProperties().find((property) => property.getName() === 'type')
 
         if (t) {
-          const typeName = t.getInitializer()!.getText()
+          const typeName = t.getInitializer()!.getText().replace(/'/g, '')
 
           if (!types.has(typeName)) {
             types.set(typeName, new Set())
@@ -34,7 +34,7 @@ export class TLTypesGenerator {
       const sourceFile = this.project.createSourceFile(
         join(
           this.project.compilerOptions.get().outDir!,
-          `${decamelize(name, { separator: '-', preserveConsecutiveUppercase: false })}.ts`
+          `${decamelize(name, { separator: '-', preserveConsecutiveUppercase: false })}.type.ts`
         )
           .toLowerCase()
           .replaceAll('_', '-'),
@@ -54,7 +54,7 @@ export class TLTypesGenerator {
         type: Array.from(params)
           .map((param) => param.name)
           .join(' | '),
-        name,
+        name: `Type${name}`,
       })
     })
   }
