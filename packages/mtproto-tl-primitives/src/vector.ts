@@ -1,9 +1,11 @@
 /* Copy/Paste from https://github.com/tgsnake/core/blob/master/src/raw/core/primitive/Vector.ts */
 
-import { BytesIO } from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
+import type { Buffer } from 'node:buffer'
 
-import { Int }     from './int.js'
-import { Long }    from './int.js'
+import { BytesIO }     from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
+
+import { Int }         from './int.js'
+import { Long }        from './int.js'
 
 export class Vector {
   static ID: number = 0x1cb5c415

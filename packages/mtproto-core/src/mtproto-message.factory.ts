@@ -1,3 +1,5 @@
+import { Buffer }                  from 'node:buffer'
+
 import { MTProtoMessageIdFactory } from './mtproto-message-id.factory.js'
 import { MTProtoMessageSequence }  from './mtproto-message-sequence.js'
 

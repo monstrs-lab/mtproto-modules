@@ -1,5 +1,6 @@
 import type { MTProtoAuthKey } from './mtproto-auth-key.js'
 
+import { Buffer }              from 'node:buffer'
 import { createHash }          from 'node:crypto'
 import { randomBytes }         from 'node:crypto'
 

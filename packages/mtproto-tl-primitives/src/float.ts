@@ -2,6 +2,8 @@
 
 import type { BytesIO } from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
 
+import { Buffer }       from 'node:buffer'
+
 export class Float {
   static write(value: number, little: boolean = true): Buffer {
     const buffer = Buffer.alloc(4)

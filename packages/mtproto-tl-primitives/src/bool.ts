@@ -4,6 +4,8 @@
 
 import type { BytesIO } from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
 
+import { Buffer }       from 'node:buffer'
+
 export class BoolFalse {
   static ID: number = 0xbc799737
 
