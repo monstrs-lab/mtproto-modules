@@ -8,6 +8,8 @@
 
 import type { BytesIO }               from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
 
+import { Buffer }                     from 'node:buffer'
+
 import { bufferToBigint as toBigint } from '@tgsnake/core/lib/src/helpers.js'
 
 export class Int {

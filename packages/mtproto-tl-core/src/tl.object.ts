@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 
 import type { BytesIO }    from '@tgsnake/core/lib/src/raw/core/BytesIO.js'
+import type { Buffer }     from 'node:buffer'
 
 import type { TLRegistry } from './tl.registry.js'
 

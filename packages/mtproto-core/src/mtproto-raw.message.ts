@@ -1,3 +1,5 @@
+import type { Buffer }                  from 'node:buffer'
+
 import type { MTProtoAuthKeyManager }   from './mtproto-auth-key.manager.js'
 
 import { InvalidAuthKeyIdError }        from './errors/index.js'
