@@ -1,5 +1,7 @@
 import type { MTProtoAuthKey } from './mtproto-auth-key.js'
 
+import { Buffer }              from 'node:buffer'
+
 import { MTProtoMessageId }    from './mtproto-message-id.js'
 
 export class MTProtoUnencryptedRawMessage {
