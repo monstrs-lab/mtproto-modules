@@ -1273,11 +1273,11 @@ __metadata:
   dependencies:
     "@jest/globals": "npm:^29.7.0"
     "@monstrs/buffer-utils": "npm:^0.0.9"
-    "@monstrs/mtproto-core": "workspace:0.0.27"
+    "@monstrs/mtproto-core": "workspace:0.0.28"
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-core@workspace:0.0.27, @monstrs/mtproto-core@workspace:packages/mtproto-core":
+"@monstrs/mtproto-core@workspace:0.0.28, @monstrs/mtproto-core@workspace:packages/mtproto-core":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-core@workspace:packages/mtproto-core"
   dependencies:
@@ -1285,12 +1285,12 @@ __metadata:
     "@monstrs/bigint-utils": "npm:^0.0.5"
     "@monstrs/buffer-utils": "npm:^0.0.9"
     "@monstrs/crypto-utils": "npm:^0.0.2"
-    "@monstrs/mtproto-crypto": "workspace:0.0.6"
+    "@monstrs/mtproto-crypto": "workspace:0.0.7"
     "@monstrs/mtproto-extensions": "workspace:0.0.4"
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-crypto@workspace:0.0.6, @monstrs/mtproto-crypto@workspace:packages/mtproto-crypto":
+"@monstrs/mtproto-crypto@workspace:0.0.7, @monstrs/mtproto-crypto@workspace:packages/mtproto-crypto":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-crypto@workspace:packages/mtproto-crypto"
   dependencies:
@@ -1307,7 +1307,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-tl-core@workspace:0.0.13, @monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core":
+"@monstrs/mtproto-tl-core@workspace:0.0.14, @monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-tl-core@workspace:packages/mtproto-tl-core"
   dependencies:
@@ -1323,7 +1323,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@monstrs/mtproto-tl-primitives@workspace:0.0.6, @monstrs/mtproto-tl-primitives@workspace:packages/mtproto-tl-primitives":
+"@monstrs/mtproto-tl-primitives@workspace:0.0.7, @monstrs/mtproto-tl-primitives@workspace:packages/mtproto-tl-primitives":
   version: 0.0.0-use.local
   resolution: "@monstrs/mtproto-tl-primitives@workspace:packages/mtproto-tl-primitives"
   dependencies:
@@ -1336,9 +1336,9 @@ __metadata:
   resolution: "@monstrs/mtproto-tl-to-typescript@workspace:packages/mtproto-tl-to-typescript"
   dependencies:
     "@jest/globals": "npm:^29.7.0"
-    "@monstrs/mtproto-tl-core": "workspace:0.0.13"
+    "@monstrs/mtproto-tl-core": "workspace:0.0.14"
     "@monstrs/mtproto-tl-json-parser": "workspace:0.0.2"
-    "@monstrs/mtproto-tl-primitives": "workspace:0.0.6"
+    "@monstrs/mtproto-tl-primitives": "workspace:0.0.7"
     "@monstrs/mtproto-tl-types": "workspace:0.0.2"
     camelcase: "npm:^8.0.0"
     commander: "npm:^12.0.0"
